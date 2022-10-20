@@ -1,1 +1,4 @@
+co/empathy/academy/demo_search/service/ElasticEngineTests.class
+co/empathy/academy/demo_search/service/RestServiceImplTest.class
 co/empathy/academy/demo_search/DemoSearchApplicationTests.class
+co/empathy/academy/demo_search/service/SearchServiceImplTest.class
