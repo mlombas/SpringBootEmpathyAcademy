@@ -2,7 +2,8 @@ package co.empathy.academy.demo_search.services;
 
 import org.json.JSONObject;
 
-public class ElasticEngine implements SearchEngine {
+public class ElasticEngine implements SearchEngine, DocumentEngine {
+    private static String TEST_INDEX_NAME = "movies";
     private RestService rest;
 
     public ElasticEngine(RestService rest) {
@@ -18,5 +19,8 @@ public class ElasticEngine implements SearchEngine {
 
     public String echo(String query) {
 	return query;
+    }
+
+    public void postDocument(JSONObject obj) {
     }
 }
