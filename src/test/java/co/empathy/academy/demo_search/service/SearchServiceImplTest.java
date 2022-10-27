@@ -1,9 +1,6 @@
 package co.empathy.academy.demo_search.service;
 
-import co.empathy.academy.demo_search.services.ElasticEngine;
-import co.empathy.academy.demo_search.services.SearchEngine;
-import co.empathy.academy.demo_search.services.SearchService;
-import co.empathy.academy.demo_search.services.SearchServiceImpl;
+import co.empathy.academy.demo_search.services.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

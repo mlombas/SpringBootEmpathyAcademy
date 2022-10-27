@@ -1,5 +1,6 @@
 package co.empathy.academy.demo_search;
 
+import co.empathy.academy.demo_search.model.Movie;
 import co.empathy.academy.demo_search.services.SearchService;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.apache.tomcat.util.json.JSONParser;
@@ -7,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.json.GsonJsonParser;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import org.json.JSONObject;
 
@@ -39,4 +38,15 @@ public class DemoSearchApplication {
 
         return response.toString();
     }
+
+    @PostMapping("/document")
+    public void document(@RequestBody String document) {
+        service.postMovie(Movie.make(document));
+    }
+
+    @GetMapping("/genres")
+    public void genres(@RequestBody String document) {
+        service.searchGenres(document);
+    }
+
 }

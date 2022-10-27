@@ -1,7 +1,10 @@
 package co.empathy.academy.demo_search.services;
 
 import org.json.JSONObject;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 
 public class RestServiceImpl implements RestService {
     private RestTemplate template;
@@ -19,12 +22,12 @@ public class RestServiceImpl implements RestService {
     }
 
     public JSONObject postJSON(String url, JSONObject json) {
-	HTTPHeaders headers = new HTTPHEaders();
+	HttpHeaders headers = new HttpHeaders();
 	headers.setContentType(MediaType.APPLICATION_JSON);
-	
+
 	String res = this.template.postForObject(
 	    url,
-	    new HTTPEntity<String>(json.toString(), headers),
+	    new HttpEntity<>(json.toString(), headers),
 	    String.class
 	);
 

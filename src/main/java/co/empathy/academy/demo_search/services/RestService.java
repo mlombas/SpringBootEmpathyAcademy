@@ -6,5 +6,5 @@ public interface RestService {
     public <T> T getUrl(String url, Class<T> clazz);
     public JSONObject getUrlJSON(String url);
 
-    public void postJSON(String url, JSONObject json);
+    public JSONObject postJSON(String url, JSONObject json);
 }
