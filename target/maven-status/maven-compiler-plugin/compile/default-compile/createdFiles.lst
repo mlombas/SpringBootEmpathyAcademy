@@ -13,5 +13,6 @@ co/empathy/academy/demo_search/query/SingleCompoundQuery.class
 co/empathy/academy/demo_search/services/RestService.class
 co/empathy/academy/demo_search/DemoSearchApplication.class
 co/empathy/academy/demo_search/query/Bool.class
+co/empathy/academy/demo_search/query/MultiMatch.class
 co/empathy/academy/demo_search/query/Match.class
 co/empathy/academy/demo_search/services/SearchEngine.class

@@ -2,9 +2,7 @@ package co.empathy.academy.demo_search.services;
 
 import co.empathy.academy.demo_search.model.Movie;
 import org.json.JSONArray;
-import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -39,13 +37,17 @@ public class SearchServiceImpl implements SearchService {
                 and
         );
 
-        IntStream.range(0, res.length()).mapToObj(res::getJSONObject)
-                .map(json -> json.getJSONObject("_source"))
-                .map(Movie::make)
-                .collect(Collectors.toList())
-                .forEach(System.out::println);
+        return jsonArrayToMovieList(res);
+    }
 
-        return IntStream.range(0, res.length()).mapToObj(res::getJSONObject)
+    @Override
+    public List<Movie> searchTitle(String title) {
+        JSONArray res = search.searchTitle(title);
+        return jsonArrayToMovieList(res);
+    }
+
+    private List<Movie> jsonArrayToMovieList(JSONArray arr) {
+        return IntStream.range(0, arr.length()).mapToObj(arr::getJSONObject)
                 .map(json -> json.getJSONObject("_source"))
                 .map(Movie::make)
                 .collect(Collectors.toList());

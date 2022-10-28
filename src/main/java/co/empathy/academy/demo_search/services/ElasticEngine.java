@@ -54,9 +54,26 @@ public class ElasticEngine implements SearchEngine {
 
         Query query = new MainQuery(new Bool(insides));
 
-        System.out.println(query.make());
-        JSONObject response = rest.postJSON(getIndexUrl() + "/_search", query.make());
-        return response
+        JSONObject response = searchQuery(query);
+        return extractHits(response);
+    }
+
+    @Override
+    public JSONArray searchTitle(String inTitle) {
+        Query query = new MainQuery(
+                new MultiMatch(inTitle, "primaryTitle", "originalTitle")
+        );
+
+        JSONObject response = searchQuery(query);
+        return extractHits(response);
+    }
+
+    private JSONObject searchQuery(Query q) {
+        return rest.postJSON(getIndexUrl() + "/_search", q.make());
+    }
+
+    private JSONArray extractHits(JSONObject elasticReutrn) {
+        return elasticReutrn
                 .getJSONObject("hits")
                 .getJSONArray("hits");
     }

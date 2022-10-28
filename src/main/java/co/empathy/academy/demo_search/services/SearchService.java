@@ -12,4 +12,6 @@ public interface SearchService {
 
     List<Movie> searchGenres(String document);
     List<Movie> searchGenres(String document, boolean and);
+
+    List<Movie> searchTitle(String title);
 }

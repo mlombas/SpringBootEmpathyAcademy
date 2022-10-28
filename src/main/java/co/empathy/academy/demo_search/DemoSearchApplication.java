@@ -54,4 +54,9 @@ public class DemoSearchApplication {
         return new JSONArray(service.searchGenres(document)).toString();
     }
 
+    @GetMapping("/intitle")
+    public String intitle(@RequestBody String intitle) {
+        return new JSONArray(service.searchTitle(intitle)).toString();
+    }
+
 }

@@ -6,11 +6,13 @@ import org.json.JSONObject;
 import java.util.List;
 
 public interface SearchEngine {
-    public String getVersion();
-    public String echo(String query);
+    String getVersion();
+    String echo(String query);
 
-    public void postDocument(JSONObject obj);
+    void postDocument(JSONObject obj);
 
-    public JSONArray searchGenre(List<String> genres);
-    public JSONArray searchGenre(List<String> genres, boolean and);
+    JSONArray searchGenre(List<String> genres);
+    JSONArray searchGenre(List<String> genres, boolean and);
+
+    JSONArray searchTitle(String inTitle);
 }
