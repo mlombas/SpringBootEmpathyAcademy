@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Map;
 
 @SpringBootApplication
@@ -47,11 +48,18 @@ public class DemoSearchApplication {
 
     @GetMapping("/genres/{and}")
     public String genres(@PathVariable boolean and, @RequestBody String document) {
-        return new JSONArray(service.searchGenres(document, and)).toString();
+        return new JSONArray(
+                service.searchGenres(
+                        Arrays.stream(document.split(" ")).toList(),
+                        and
+                )
+        ).toString();
     }
     @GetMapping("/genres")
     public String genres(@RequestBody String document) {
-        return new JSONArray(service.searchGenres(document)).toString();
+        return new JSONArray(service.searchGenres(
+                Arrays.stream(document.split(" ")).toList()
+        )).toString();
     }
 
     @GetMapping("/intitle")

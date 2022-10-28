@@ -27,13 +27,13 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public List<Movie> searchGenres(String document) {
-        return searchGenres(document, true);
+    public List<Movie> searchGenres(List<String> documents) {
+        return searchGenres(documents, true);
     }
     @Override
-    public List<Movie> searchGenres(String document, boolean and) {
+    public List<Movie> searchGenres(List<String> documents, boolean and) {
         JSONArray res = search.searchGenre(
-                List.of(document.split(" ")),
+                documents,
                 and
         );
 
