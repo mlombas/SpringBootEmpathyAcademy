@@ -1,6 +1,7 @@
 package co.empathy.academy.demo_search.services;
 
 import co.empathy.academy.demo_search.query.*;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -35,11 +36,11 @@ public class ElasticEngine implements SearchEngine {
     }
 
     @Override
-    public void searchGenre(List<String> genres) {
-        searchGenre(genres, true);
+    public JSONArray searchGenre(List<String> genres) {
+        return searchGenre(genres, true);
     }
     @Override
-    public void searchGenre(List<String> genres, boolean and) {
+    public JSONArray searchGenre(List<String> genres, boolean and) {
         MultipleCompoundQuery insides;
         if(and) insides = new And();
         else insides = new Or();
@@ -51,9 +52,12 @@ public class ElasticEngine implements SearchEngine {
                     )
             );
 
-        Query query = new MainQuery(insides);
+        Query query = new MainQuery(new Bool(insides));
 
         System.out.println(query.make());
-        //rest.getUrlJSON(getIndexUrl() + "/_search", query.make());
+        JSONObject response = rest.postJSON(getIndexUrl() + "/_search", query.make());
+        return response
+                .getJSONObject("hits")
+                .getJSONArray("hits");
     }
 }

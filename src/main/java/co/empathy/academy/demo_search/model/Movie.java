@@ -37,7 +37,9 @@ public class Movie {
     }
 
     public static Movie make(String res) {
-        var json = new JSONObject(res);
+        return make(new JSONObject(res));
+    }
+    public static Movie make(JSONObject json) {
         var movie = new Movie();
 
         if(json.has("type"))
@@ -56,10 +58,10 @@ public class Movie {
             movie.runtimeMinutes = json.getInt("runtimeMinutes");
         if(json.has("genres"))
             movie.genres = json.getJSONArray("genres")
-		.toList().stream()
-		.map(element -> (String) element)
-		.map(String::toLowerCase)
-		.collect(Collectors.toList());
+                    .toList().stream()
+                    .map(element -> (String) element)
+                    .map(String::toLowerCase)
+                    .collect(Collectors.toList());
 
         return movie;
     }

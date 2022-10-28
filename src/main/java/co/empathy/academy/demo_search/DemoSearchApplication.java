@@ -4,6 +4,7 @@ import co.empathy.academy.demo_search.model.Movie;
 import co.empathy.academy.demo_search.services.SearchService;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.apache.tomcat.util.json.JSONParser;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -44,9 +45,13 @@ public class DemoSearchApplication {
         service.postMovie(Movie.make(document));
     }
 
+    @GetMapping("/genres/{and}")
+    public String genres(@PathVariable boolean and, @RequestBody String document) {
+        return new JSONArray(service.searchGenres(document, and)).toString();
+    }
     @GetMapping("/genres")
-    public void genres(@RequestBody String document) {
-        service.searchGenres(document);
+    public String genres(@RequestBody String document) {
+        return new JSONArray(service.searchGenres(document)).toString();
     }
 
 }
