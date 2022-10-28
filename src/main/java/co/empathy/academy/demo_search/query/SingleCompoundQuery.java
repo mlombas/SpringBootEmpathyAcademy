@@ -1,5 +1,7 @@
 package co.empathy.academy.demo_search.query;
 
+import org.json.JSONObject;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,9 +16,8 @@ public abstract class SingleCompoundQuery implements Query {
     protected abstract String queryName();
 
     @Override
-    public String make() {
-        return "{\"" + queryName() + "\": " +
-                compound.make()
-                + "}";
+    public JSONObject make() {
+        return new JSONObject()
+                .put(queryName(), compound.make());
     }
 }

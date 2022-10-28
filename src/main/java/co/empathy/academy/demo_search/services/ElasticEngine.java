@@ -54,5 +54,6 @@ public class ElasticEngine implements SearchEngine {
         Query query = new MainQuery(insides);
 
         System.out.println(query.make());
+        //rest.getUrlJSON(getIndexUrl() + "/_search", query.make());
     }
 }

@@ -16,12 +16,27 @@ public class RestServiceImpl implements RestService {
     public <T> T getUrl(String url, Class<T> clazz) {
 	return this.template.getForObject(url, clazz);
     }
+	public <T> T getUrl(String url, JSONObject body, Class<T> clazz) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
 
-    public JSONObject getUrlJSON(String url) {
-	return new JSONObject(getUrl(url, String.class));
+		T res = this.template.getForObject(
+				url,
+				clazz,
+				new HttpEntity<>(body.toString(), headers)
+		);
+
+		return res;
+	}
+
+	public JSONObject getUrlJSON(String url) {
+		return new JSONObject(getUrl(url, String.class));
     }
+	public JSONObject getUrlJSON(String url, JSONObject body) {
+		return new JSONObject(getUrl(url, body, String.class));
+	}
 
-    public JSONObject postJSON(String url, JSONObject json) {
+	public JSONObject postJSON(String url, JSONObject json) {
 	HttpHeaders headers = new HttpHeaders();
 	headers.setContentType(MediaType.APPLICATION_JSON);
 

@@ -1,5 +1,7 @@
 package co.empathy.academy.demo_search.query;
 
+import org.json.JSONObject;
+
 public class LeafQuery implements Query {
     private String name;
     private Object value;
@@ -10,7 +12,8 @@ public class LeafQuery implements Query {
     }
 
     @Override
-    public String make() {
-       return "{\"" + name + "\": " + value + "}";
+    public JSONObject make() {
+       return new JSONObject()
+               .put(name, value);
     }
 }
