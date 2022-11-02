@@ -25,46 +25,7 @@ import java.util.Map;
 @RestController
 public class DemoSearchApplication {
 
-    @Autowired
-    SearchService service;
-
     public static void main(String[] args) {
-	SpringApplication.run(DemoSearchApplication.class, args);
+        SpringApplication.run(DemoSearchApplication.class, args);
     }
-
-    @GetMapping("/search")
-    public String search(@RequestParam String query) throws IOException {
-        JSONObject response = new JSONObject();
-        response.put("query", query);
-        response.put("clusterName", service.engineVersion());
-
-        return response.toString();
-    }
-
-    @PostMapping("/document")
-    public void document(@RequestBody String document) {
-        service.postMovie(Movie.make(document));
-    }
-
-    @GetMapping("/genres/{and}")
-    public String genres(@PathVariable boolean and, @RequestBody String document) {
-        return new JSONArray(
-                service.searchGenres(
-                        Arrays.stream(document.split(" ")).toList(),
-                        and
-                )
-        ).toString();
-    }
-    @GetMapping("/genres")
-    public String genres(@RequestBody String document) {
-        return new JSONArray(service.searchGenres(
-                Arrays.stream(document.split(" ")).toList()
-        )).toString();
-    }
-
-    @GetMapping("/intitle")
-    public String intitle(@RequestBody String intitle) {
-        return new JSONArray(service.searchTitle(intitle)).toString();
-    }
-
 }

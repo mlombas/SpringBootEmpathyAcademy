@@ -4,6 +4,7 @@ import lombok.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -28,6 +29,7 @@ public class Movie {
 
     public JSONObject toJSON() {
         return new JSONObject()
+                .put("id", id)
                 .put("type", nonNullOrEmpty(type))
                 .put("primaryTitle", nonNullOrEmpty(primaryTitle))
                 .put("originalTitle", nonNullOrEmpty(originalTitle))
@@ -42,6 +44,16 @@ public class Movie {
         return make(new JSONObject(res));
     }
     public static Movie make(JSONObject json) {
+        JSONArray genres =  json.optJSONArray("genres");
+        List<String> genresList;
+        if(genres != null)
+            genresList = genres
+                    .toList().stream()
+                    .map(element -> (String) element)
+                    .map(String::toLowerCase)
+                    .collect(Collectors.toList());
+        else genresList = new LinkedList<>();
+
         return new Movie(
                 (UUID) json.opt("id"),
                 json.optString("type"),
@@ -51,11 +63,7 @@ public class Movie {
                 json.optString("startYear"),
                 json.optString("endYear"),
                 json.optInt("runtimeMinutes"),
-                json.optJSONArray("genres")
-                        .toList().stream()
-                        .map(element -> (String) element)
-                        .map(String::toLowerCase)
-                        .collect(Collectors.toList())
+               genresList
         );
     }
 }

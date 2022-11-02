@@ -4,6 +4,7 @@ import co.empathy.academy.demo_search.model.Movie;
 import org.json.JSONArray;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -22,8 +23,10 @@ public class SearchServiceImpl implements SearchService {
 	return search.getVersion();
     }
 
-    public void postMovie(Movie movie) {
+    public Movie postMovie(Movie movie) {
+        movie = movie.withId(UUID.randomUUID());
         search.postDocument(movie.toJSON());
+        return movie;
     }
 
     @Override

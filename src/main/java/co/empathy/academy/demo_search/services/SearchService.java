@@ -3,6 +3,7 @@ package co.empathy.academy.demo_search.services;
 import co.empathy.academy.demo_search.model.Movie;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface SearchService {
     /**
@@ -23,7 +24,7 @@ public interface SearchService {
      *
      * @param m the movie
      */
-    void postMovie(Movie m);
+    Movie postMovie(Movie m);
 
     /**
      * Searches movies, returning those that match all genres passed in
