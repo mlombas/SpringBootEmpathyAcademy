@@ -72,8 +72,8 @@ public class ElasticEngine implements SearchEngine {
         return rest.postJSON(getIndexUrl() + "/_search", q.make());
     }
 
-    private JSONArray extractHits(JSONObject elasticReutrn) {
-        return elasticReutrn
+    private JSONArray extractHits(JSONObject elasticReturn) {
+        return elasticReturn
                 .getJSONObject("hits")
                 .getJSONArray("hits");
     }
