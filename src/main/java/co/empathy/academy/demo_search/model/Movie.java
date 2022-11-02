@@ -5,12 +5,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@Value
+@With
 public class Movie {
+    private UUID id;
     private String type;
     private String primaryTitle;
     private String originalTitle;
@@ -24,6 +25,7 @@ public class Movie {
         if(s == null) return "";
         return s;
     }
+
     public JSONObject toJSON() {
         return new JSONObject()
                 .put("type", nonNullOrEmpty(type))
@@ -40,29 +42,20 @@ public class Movie {
         return make(new JSONObject(res));
     }
     public static Movie make(JSONObject json) {
-        var movie = new Movie();
-
-        if(json.has("type"))
-            movie.type = json.getString("type");
-        if(json.has("primaryTitle"))
-            movie.primaryTitle = json.getString("primaryTitle");
-        if(json.has("originalTitle"))
-            movie.originalTitle = json.getString("originalTitle");
-        if(json.has("isAdult"))
-            movie.isAdult = json.getBoolean("isAdult");
-        if(json.has("startYear"))
-            movie.startYear = json.getString("startYear");
-        if(json.has("endYear"))
-            movie.endYear = json.getString("endYear");
-        if(json.has("runtimeMinutes"))
-            movie.runtimeMinutes = json.getInt("runtimeMinutes");
-        if(json.has("genres"))
-            movie.genres = json.getJSONArray("genres")
-                    .toList().stream()
-                    .map(element -> (String) element)
-                    .map(String::toLowerCase)
-                    .collect(Collectors.toList());
-
-        return movie;
+        return new Movie(
+                (UUID) json.opt("id"),
+                json.optString("type"),
+                json.optString("primaryTitle"),
+                json.optString("originalTitle"),
+                json.optBoolean("isAdult"),
+                json.optString("startYear"),
+                json.optString("endYear"),
+                json.optInt("runtimeMinutes"),
+                json.optJSONArray("genres")
+                        .toList().stream()
+                        .map(element -> (String) element)
+                        .map(String::toLowerCase)
+                        .collect(Collectors.toList())
+        );
     }
 }
