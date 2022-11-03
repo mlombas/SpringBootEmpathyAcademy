@@ -1,5 +1,7 @@
 package co.empathy.academy.demo_search.service;
 
+import co.empathy.academy.demo_search.search.LowLevelElasticEngine;
+import co.empathy.academy.demo_search.search.SearchEngine;
 import co.empathy.academy.demo_search.services.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,7 +15,6 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 
 @ExtendWith(MockitoExtension.class)
 public class ElasticEngineTests {
@@ -22,7 +23,7 @@ public class ElasticEngineTests {
     void givenAnyQuery_whenEcho_thenSameIsReturned() {
 	String query = "echo";
 
-	SearchEngine searchEngine = new ElasticEngine(new RestServiceImpl());
+	SearchEngine searchEngine = new LowLevelElasticEngine(new RestServiceImpl());
 
 	String echoed = searchEngine.echo(query);
 	assertEquals(query, echoed);
@@ -35,7 +36,7 @@ public class ElasticEngineTests {
 	given(mockedRest.getUrlJSON("http://localhost:9200"))
 	    .willReturn(new JSONObject("{'version': {'number': " + version + "}}"));
 
-	SearchEngine searchEngine = new ElasticEngine(mockedRest);
+	SearchEngine searchEngine = new LowLevelElasticEngine(mockedRest);
 
 	String returnedVersion = searchEngine.getVersion();
 	assertEquals(version, returnedVersion);

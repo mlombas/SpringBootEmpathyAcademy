@@ -7,12 +7,12 @@ co/empathy/academy/demo_search/configuration/Config.class
 co/empathy/academy/demo_search/query/MultipleCompoundQuery.class
 co/empathy/academy/demo_search/services/SearchService.class
 co/empathy/academy/demo_search/query/LeafQuery.class
-co/empathy/academy/demo_search/services/ElasticEngine.class
 co/empathy/academy/demo_search/query/Or.class
 co/empathy/academy/demo_search/query/SingleCompoundQuery.class
 co/empathy/academy/demo_search/services/RestService.class
 co/empathy/academy/demo_search/DemoSearchApplication.class
 co/empathy/academy/demo_search/query/Bool.class
+co/empathy/academy/demo_search/services/LowLevelElasticEngine.class
 co/empathy/academy/demo_search/query/MultiMatch.class
 co/empathy/academy/demo_search/query/Match.class
 co/empathy/academy/demo_search/services/SearchEngine.class

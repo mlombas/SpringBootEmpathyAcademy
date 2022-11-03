@@ -1,5 +1,7 @@
 package co.empathy.academy.demo_search.service;
 
+import co.empathy.academy.demo_search.search.LowLevelElasticEngine;
+import co.empathy.academy.demo_search.search.SearchEngine;
 import co.empathy.academy.demo_search.services.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +13,6 @@ import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 
 @ExtendWith(MockitoExtension.class)
 public class SearchServiceImplTest {
@@ -19,7 +20,7 @@ public class SearchServiceImplTest {
     @Test
     void givenAnyQuery_whenEcho_thenSameIsReturned() {
 	String query = "echo";
-	SearchEngine searchEngine = mock(ElasticEngine.class);
+	SearchEngine searchEngine = mock(LowLevelElasticEngine.class);
 	given(searchEngine.echo(query)).willReturn(query);
 
 	SearchService searchService = new SearchServiceImpl(searchEngine);
@@ -32,7 +33,7 @@ public class SearchServiceImplTest {
     void givenASearchServiceImpl_whenAskedForEngineVersion_thenReturnsSameAsEngine() {
 	String version = "1.1.1.1";
 
-	SearchEngine searchEngine = mock(ElasticEngine.class);
+	SearchEngine searchEngine = mock(LowLevelElasticEngine.class);
 	given(searchEngine.getVersion()).willReturn(version);
 
 	SearchService searchService = new SearchServiceImpl(searchEngine);
