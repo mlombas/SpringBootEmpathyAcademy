@@ -21,16 +21,16 @@ public class SpringSearchController {
     @Autowired
     private PRequestReactor reactor;
 
-    @Async
     @GetMapping("/genres/{and}")
-    public ResponseEntity<CompletableFuture<List<Movie>>>
+    public ResponseEntity<List<Movie>>
     genres(@PathVariable boolean and, @RequestBody List<String> genres)
     {
-        SearchCommand search = new GenreSearchCommand(genres);
-        reactor.reactToSearch(search);
+        List<Movie> movies = reactor.reactToSearch(
+                new GenreSearchCommand(genres)
+        );
 
         return ResponseEntity.ok(
-            search.getFuture()
+            movies
         );
     }
     @GetMapping("/genres")

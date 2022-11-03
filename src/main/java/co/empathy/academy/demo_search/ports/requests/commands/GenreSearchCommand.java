@@ -37,4 +37,9 @@ public class GenreSearchCommand implements SearchCommand<Movie> {
     public void accept(List<Movie> returns) {
         future.complete(returns);
     }
+
+    @Override
+    public Class<Movie> getInnerClass() {
+        return Movie.class;
+    }
 }

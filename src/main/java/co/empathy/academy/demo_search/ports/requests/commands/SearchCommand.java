@@ -11,4 +11,5 @@ public interface SearchCommand<T> extends Consumer<List<T>> {
     Query build(PQueryBuilder builder);
     CompletableFuture<List<T>> getFuture();
     void accept(List<T> returns);
+    Class<T> getInnerClass();
 }
