@@ -5,6 +5,7 @@ import co.empathy.academy.demo_search.model.Movie;
 import co.empathy.academy.demo_search.ports.queries.PQueryBuilder;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
 import co.empathy.academy.demo_search.ports.requests.commands.GenreSearchCommand;
+import co.empathy.academy.demo_search.ports.requests.commands.InTitleSearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.SearchCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,21 +25,27 @@ public class SpringSearchController {
     public ResponseEntity<List<Movie>>
     genres(@PathVariable boolean and, @RequestBody List<String> genres)
     {
-        return ResponseEntity.badRequest().build();
-    }
-    @GetMapping("/genres")
-    public ResponseEntity<List<Movie>> genres(@RequestBody List<String> genres) {
         List<Movie> movies = reactor.reactToSearch(
-                new GenreSearchCommand(genres)
+                new GenreSearchCommand(genres, and)
         );
 
         return ResponseEntity.ok(
                 movies
         );
     }
+    @GetMapping("/genres")
+    public ResponseEntity<List<Movie>>
+    genres(@RequestBody List<String> genres)
+    {
+        return genres(true, genres);
+    }
 
     @GetMapping("/intitle")
     public ResponseEntity<List<Movie>> intitle(@RequestBody String intitle) {
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(
+                reactor.reactToSearch(
+                        new InTitleSearchCommand(intitle)
+                )
+        );
     }
 }

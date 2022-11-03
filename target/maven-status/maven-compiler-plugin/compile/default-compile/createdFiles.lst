@@ -7,12 +7,16 @@ co/empathy/academy/demo_search/ports/queries/adapters/ElasticQueryBuilderState.c
 co/empathy/academy/demo_search/ports/queries/adapters/ElasticStateException.class
 co/empathy/academy/demo_search/ports/requests/senders/SpringSearchController.class
 co/empathy/academy/demo_search/configuration/Config.class
+co/empathy/academy/demo_search/ports/queries/adapters/MultiMatchState.class
 co/empathy/academy/demo_search/ports/requests/PRequestReactor.class
+co/empathy/academy/demo_search/ports/queries/adapters/ShouldState.class
 co/empathy/academy/demo_search/ports/queries/adapters/BaseState.class
 co/empathy/academy/demo_search/ports/requests/commands/GenreSearchCommand.class
+co/empathy/academy/demo_search/ports/queries/adapters/DefaultState.class
 co/empathy/academy/demo_search/ports/requests/commands/SearchCommand.class
 co/empathy/academy/demo_search/DemoSearchApplication.class
 co/empathy/academy/demo_search/model/Movie.class
 co/empathy/academy/demo_search/hexagon/Boundary.class
 co/empathy/academy/demo_search/configuration/ElasticConfig.class
 co/empathy/academy/demo_search/ports/executors/PQueryExecutor.class
+co/empathy/academy/demo_search/ports/requests/commands/InTitleSearchCommand.class

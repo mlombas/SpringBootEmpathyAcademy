@@ -3,6 +3,7 @@ package co.empathy.academy.demo_search.ports.queries.adapters;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.empathy.academy.demo_search.ports.queries.PQueryBuilder;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ElasticQueryBuilder implements PQueryBuilder {
@@ -29,6 +30,16 @@ public class ElasticQueryBuilder implements PQueryBuilder {
     public PQueryBuilder match(String field, String value) {
         this.state = this.state.match(field, value);
         return this;
+    }
+
+    @Override
+    public PQueryBuilder multi(String query, List<String> fields) {
+        this.state = this.state.multi(query, fields);
+        return this;
+    }
+    @Override
+    public PQueryBuilder multi(String query, String... fields) {
+        return multi(query, Arrays.stream(fields).toList());
     }
 
     @Override

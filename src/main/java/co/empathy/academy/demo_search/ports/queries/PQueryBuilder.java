@@ -11,5 +11,8 @@ public interface PQueryBuilder {
 
     PQueryBuilder match(String field, String value);
 
+    PQueryBuilder multi(String query, List<String> fields);
+    PQueryBuilder multi(String query, String... fields);
+
     Query build();
 }
