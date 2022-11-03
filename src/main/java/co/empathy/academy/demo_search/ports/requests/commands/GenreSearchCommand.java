@@ -12,16 +12,21 @@ import java.util.function.Consumer;
 public class GenreSearchCommand implements SearchCommand<Movie> {
 
     private final List<String> genres;
+    private final boolean and;
     private CompletableFuture<List<Movie>> future;
 
     public GenreSearchCommand(List<String> genres) {
+        this(genres, true);
+    }
+    public GenreSearchCommand(List<String> genres, boolean and) {
+        this.and = and;
         this.genres = genres;
         this.future = new CompletableFuture<>();
     }
 
     @Override
     public Query build(PQueryBuilder builder) {
-        var must = builder.must();
+        var must = and ? builder.must() : builder.should();
         for(var genre : genres)
             must = must.match("genres", genre);
 

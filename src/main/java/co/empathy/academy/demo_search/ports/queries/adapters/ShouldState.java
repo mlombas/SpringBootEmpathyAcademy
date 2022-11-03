@@ -4,17 +4,17 @@ import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 
-public class MustState extends DefaultState {
+public class ShouldState extends DefaultState {
 
     private final BoolQuery.Builder builder;
 
-    public MustState() {
+    public ShouldState() {
         this.builder = QueryBuilders.bool();
     }
 
     @Override
     public ElasticQueryBuilderState match(String field, String value) {
-        this.builder.must(
+        this.builder.should(
                 t -> t.match(
                         m -> m.field(field).query(value)
                 )

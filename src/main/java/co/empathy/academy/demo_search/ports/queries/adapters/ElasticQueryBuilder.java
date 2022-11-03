@@ -20,6 +20,12 @@ public class ElasticQueryBuilder implements PQueryBuilder {
     }
 
     @Override
+    public PQueryBuilder should() {
+        this.state = this.state.should();
+        return this;
+    }
+
+    @Override
     public PQueryBuilder match(String field, String value) {
         this.state = this.state.match(field, value);
         return this;

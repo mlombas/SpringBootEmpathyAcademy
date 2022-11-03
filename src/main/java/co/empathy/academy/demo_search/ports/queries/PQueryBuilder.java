@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface PQueryBuilder {
     PQueryBuilder must();
+    PQueryBuilder should();
 
     PQueryBuilder match(String field, String value);
 
