@@ -10,14 +10,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
-@NoArgsConstructor
-@Data
-@JsonIgnoreProperties //TODO: REMOVE, FOR DEBUG PURPOSES ONLY
+@NoArgsConstructor(force = true)
+@Value
 public class Movie {
     private String type;
     private String primaryTitle;
     private String originalTitle;
-    private boolean isAdult;
+    private boolean adult;
     private String startYear;
     @Nullable private String endYear;
     private int runtimeMinutes;

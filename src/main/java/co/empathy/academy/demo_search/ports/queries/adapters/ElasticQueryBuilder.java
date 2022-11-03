@@ -27,6 +27,11 @@ public class ElasticQueryBuilder implements PQueryBuilder {
 
     @Override
     public Query build() {
-        return state.build();
+        Query q = state.build();
+
+        //Renew state, to make a fresh builder
+        state = new BaseState();
+
+        return q;
     }
 }

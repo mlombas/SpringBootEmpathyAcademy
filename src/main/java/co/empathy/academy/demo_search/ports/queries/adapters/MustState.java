@@ -31,7 +31,6 @@ public class MustState implements ElasticQueryBuilderState {
 
     @Override
     public Query build() {
-        Query q = builder.build()._toQuery();
-        return q;
+        return builder.build()._toQuery();
     }
 }
