@@ -23,7 +23,7 @@ public class Config {
         return new ElasticQueryBuilder();
     }
     @Bean
-    public PRequestReactor requestReactor() {
-        return new Boundary(queryBuilder(), queryExecutor());
+    public PRequestReactor requestReactor(PQueryBuilder builder, PQueryExecutor executor) {
+        return new Boundary(builder, executor);
     }
 }

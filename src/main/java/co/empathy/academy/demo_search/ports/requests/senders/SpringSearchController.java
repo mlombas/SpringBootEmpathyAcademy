@@ -12,7 +12,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/search")
@@ -25,17 +24,17 @@ public class SpringSearchController {
     public ResponseEntity<List<Movie>>
     genres(@PathVariable boolean and, @RequestBody List<String> genres)
     {
+        return ResponseEntity.badRequest().build();
+    }
+    @GetMapping("/genres")
+    public ResponseEntity<List<Movie>> genres(@RequestBody List<String> genres) {
         List<Movie> movies = reactor.reactToSearch(
                 new GenreSearchCommand(genres)
         );
 
         return ResponseEntity.ok(
-            movies
+                movies
         );
-    }
-    @GetMapping("/genres")
-    public ResponseEntity<List<Movie>> genres(@RequestBody List<String> genres) {
-        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/intitle")

@@ -1,12 +1,11 @@
 package co.empathy.academy.demo_search.ports.queries.adapters;
 
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
-import org.elasticsearch.index.query.QueryBuilder;
-
 public class BaseState implements ElasticQueryBuilderState {
 
     @Override
     public ElasticQueryBuilderState must() {
+        System.out.println("Called must from base");
         return new MustState();
     }
 

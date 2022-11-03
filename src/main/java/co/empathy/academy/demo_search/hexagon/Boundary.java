@@ -6,7 +6,6 @@ import co.empathy.academy.demo_search.ports.queries.PQueryBuilder;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
 import co.empathy.academy.demo_search.ports.requests.commands.SearchCommand;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 

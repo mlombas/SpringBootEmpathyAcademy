@@ -14,11 +14,13 @@ public class MustState implements ElasticQueryBuilderState {
 
     @Override
     public ElasticQueryBuilderState must() {
+        System.out.println("Called must from must");
         throw new ElasticStateException("Must", "must");
     }
 
     @Override
     public ElasticQueryBuilderState match(String field, String value) {
+        System.out.println("Called match from must");
         this.builder.must(
                 t -> t.match(
                         m -> m.field(field).query(value)
@@ -29,6 +31,7 @@ public class MustState implements ElasticQueryBuilderState {
 
     @Override
     public Query build() {
-        return builder.build()._toQuery();
+        Query q = builder.build()._toQuery();
+        return q;
     }
 }
