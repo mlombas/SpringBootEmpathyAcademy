@@ -2,6 +2,13 @@
 This repository compiles a list of exercises
 and projects for the Empathy.co Academy program.
 
+## Hexagonal Architecture
+This project is following an hexagonal architecture style, with ports and adapters.
+In the following diagram can be seen a brief explanation of the current state of the project:
+The Spring controllers send requests, these (for the moment) search requests get thrown about the hexagon,
+the query builder adapter injects the query on the request, and then the executor executes it.
+![The hexagon architecture](docs/hexagonal.png)
+
 ## REST API
 > **_NOTE_**: This interface is provisional and _WILL_ be changed
 
