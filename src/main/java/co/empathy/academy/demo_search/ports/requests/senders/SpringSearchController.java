@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/search")
@@ -22,30 +23,33 @@ public class SpringSearchController {
     private PRequestReactor reactor;
 
     @GetMapping("/genres/{and}")
-    public ResponseEntity<List<Movie>>
+    public CompletableFuture<ResponseEntity<List<Movie>>>
     genres(@PathVariable boolean and, @RequestBody List<String> genres)
     {
-        List<Movie> movies = reactor.reactToSearch(
+        CompletableFuture<List<Movie>> movies = reactor.reactToSearch(
                 new GenreSearchCommand(genres, and)
         );
 
-        return ResponseEntity.ok(
-                movies
-        );
+        return movies
+                .thenApply(m ->
+                        ResponseEntity.ok(m)
+                );
     }
     @GetMapping("/genres")
-    public ResponseEntity<List<Movie>>
+    public CompletableFuture<ResponseEntity<List<Movie>>>
     genres(@RequestBody List<String> genres)
     {
         return genres(true, genres);
     }
 
     @GetMapping("/intitle")
-    public ResponseEntity<List<Movie>> intitle(@RequestBody String intitle) {
-        return ResponseEntity.ok(
-                reactor.reactToSearch(
+    public CompletableFuture<ResponseEntity<List<Movie>>>
+    intitle(@RequestBody String intitle) {
+        return reactor.reactToSearch(
                         new InTitleSearchCommand(intitle)
                 )
-        );
+                .thenApply(m ->
+                        ResponseEntity.ok(m)
+                );
     }
 }

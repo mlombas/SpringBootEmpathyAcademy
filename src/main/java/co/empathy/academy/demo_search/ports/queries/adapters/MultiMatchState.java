@@ -10,6 +10,7 @@ import java.util.List;
 public class MultiMatchState extends DefaultState {
     private final MultiMatchQuery.Builder builder;
 
+    //TODO: not totally convinced by this, rework it
     public MultiMatchState(String value, List<String> fields) {
         this.builder = QueryBuilders.multiMatch()
                 .query(value)

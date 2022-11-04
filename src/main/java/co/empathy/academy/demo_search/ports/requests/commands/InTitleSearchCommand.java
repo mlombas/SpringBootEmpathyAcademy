@@ -13,8 +13,8 @@ public class InTitleSearchCommand implements SearchCommand<Movie> {
 
     public InTitleSearchCommand(String intitle) {
         this.intitle = intitle;
+        this.future = new CompletableFuture<>();
     }
-
 
     @Override
     public Query build(PQueryBuilder builder) {

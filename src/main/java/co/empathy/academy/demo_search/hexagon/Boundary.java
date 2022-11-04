@@ -8,6 +8,7 @@ import co.empathy.academy.demo_search.ports.requests.commands.SearchCommand;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @AllArgsConstructor
 public class Boundary implements PRequestReactor {
@@ -16,8 +17,11 @@ public class Boundary implements PRequestReactor {
     private PQueryExecutor queryExecutor;
 
     @Override
-    public <T> List<T> reactToSearch(SearchCommand<T> c) {
+    public <T> CompletableFuture<List<T>> reactToSearch(SearchCommand<T> c) {
         Query q = c.build(queryBuilder);
-        return queryExecutor.executeQuery(q, c.getInnerClass());
+        c.accept(
+                queryExecutor.executeQuery(q, c.getInnerClass())
+        );
+        return c.getFuture();
     }
 }
