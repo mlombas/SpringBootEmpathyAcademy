@@ -3,6 +3,7 @@ package co.empathy.academy.demo_search.ports.queries.adapters;
 import co.elastic.clients.elasticsearch._types.query_dsl.MultiMatchQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
+import org.elasticsearch.client.ml.inference.preprocessing.Multi;
 
 import java.util.List;
 
