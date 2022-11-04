@@ -10,6 +10,10 @@ import lombok.AllArgsConstructor;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Default boundary.
+ * Wires everything together, this is the "hexagon" of our architecture.
+ */
 @AllArgsConstructor
 public class Boundary implements PRequestReactor {
 
