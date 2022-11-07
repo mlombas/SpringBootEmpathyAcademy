@@ -1,13 +1,12 @@
-package co.empathy.academy.demo_search.ports.requests.commands;
+package co.empathy.academy.demo_search.ports.requests.commands.search;
 
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.empathy.academy.demo_search.model.Movie;
 import co.empathy.academy.demo_search.ports.queries.PQueryBuilder;
-import lombok.RequiredArgsConstructor;
+import co.empathy.academy.demo_search.ports.requests.commands.SearchCommand;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
 
 public class GenreSearchCommand implements SearchCommand<Movie> {
 

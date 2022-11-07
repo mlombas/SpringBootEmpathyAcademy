@@ -1,15 +1,11 @@
 package co.empathy.academy.demo_search.ports.requests.senders;
 
-import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.empathy.academy.demo_search.model.Movie;
-import co.empathy.academy.demo_search.ports.queries.PQueryBuilder;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
-import co.empathy.academy.demo_search.ports.requests.commands.GenreSearchCommand;
-import co.empathy.academy.demo_search.ports.requests.commands.InTitleSearchCommand;
-import co.empathy.academy.demo_search.ports.requests.commands.SearchCommand;
+import co.empathy.academy.demo_search.ports.requests.commands.search.GenreSearchCommand;
+import co.empathy.academy.demo_search.ports.requests.commands.search.InTitleSearchCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

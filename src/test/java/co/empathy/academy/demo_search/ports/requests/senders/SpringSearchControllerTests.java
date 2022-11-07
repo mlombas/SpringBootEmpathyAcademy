@@ -3,10 +3,8 @@ package co.empathy.academy.demo_search.ports.requests.senders;
 import co.empathy.academy.demo_search.hexagon.Boundary;
 import co.empathy.academy.demo_search.model.Movie;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
-import co.empathy.academy.demo_search.ports.requests.commands.SearchCommand;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatcher;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
