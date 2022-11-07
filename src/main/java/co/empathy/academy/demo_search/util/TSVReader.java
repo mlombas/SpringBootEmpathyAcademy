@@ -41,8 +41,10 @@ public class TSVReader<T> implements Iterable<T> {
     }
 
     private List<String> extractLine() throws IOException {
+        String line = reader.readLine();
+        if(line == null) return null;
         return Arrays.stream(
-                    reader.readLine().split("\t")
+                    line.split("\t")
                 )
                 .toList();
     }
@@ -50,8 +52,6 @@ public class TSVReader<T> implements Iterable<T> {
     private T convertLine(List<String> line)
             throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException
     {
-        headers.stream().forEach(System.out::println);
-        line.stream().forEach(System.out::println);
         //Lotta reflection and such
         T result = clazz.getDeclaredConstructor().newInstance();
         for(int i = 0; i < line.size(); i++) {

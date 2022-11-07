@@ -10,23 +10,22 @@ import java.util.Iterator;
 import java.util.List;
 
 public class BulkIndexCommand<T> implements DocumentCommand {
+    private final Class<T> clazz;
     private File file;
-    public BulkIndexCommand(File file) {
+    public BulkIndexCommand(File file, Class<T> clazz) {
         this.file = file;
+        this.clazz = clazz;
     }
 
     @Override
-    public List<T> getDocuments() {
-        TSVReader<Movie> tsv;
+    public Iterable<T> getDocuments() {
+        TSVReader<T> tsv;
         try {
-            tsv = new TSVReader<>(file, Movie.class, "genres");
+            tsv = new TSVReader<>(file, clazz, "genres");
         } catch (IOException e) {
             tsv = null;
         }
 
-        for(Movie m : tsv)
-            System.out.println(m);
-
-        return null;
+        return tsv;
     }
 }

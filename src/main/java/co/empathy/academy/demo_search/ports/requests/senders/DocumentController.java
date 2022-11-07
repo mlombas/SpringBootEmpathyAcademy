@@ -23,7 +23,8 @@ public class DocumentController {
     public ResponseEntity<Movie> document(@RequestBody String document) {
         reactor.reactToDocument(
                 new BulkIndexCommand<>(
-                        new File("title.basics.tsv")
+                        new File("title.basics.tsv"),
+                        Movie.class
                 )
         );
 

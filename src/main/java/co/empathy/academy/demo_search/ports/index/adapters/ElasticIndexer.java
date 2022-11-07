@@ -2,8 +2,10 @@ package co.empathy.academy.demo_search.ports.index.adapters;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.BulkRequest;
+import co.empathy.academy.demo_search.ports.index.Indexable;
 import co.empathy.academy.demo_search.ports.index.IndexerSettings;
 import co.empathy.academy.demo_search.ports.index.PDocumentIndexer;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -27,15 +29,16 @@ public class ElasticIndexer implements PDocumentIndexer {
         requestBuilder = new BulkRequest.Builder();
     }
 
-    private <T> void addDocument(T document) {
+    private <T extends Indexable> void addDocument(T document) {
         requestBuilder.operations(op -> op.index(idx ->
                 idx.index(settings.getIndexName())
+                        .id(document.getID())
                         .document(document)
         ));
     }
 
     @Override
-    public <T> void indexOne(T document) {
+    public <T extends Indexable> void indexOne(T document) {
         addDocument(document);
 
         try {
@@ -46,9 +49,15 @@ public class ElasticIndexer implements PDocumentIndexer {
     }
 
     @Override
-    public <T> void bulkIndex(List<T> documents) {
-        int counter = 0;
+    public <T extends Indexable> void bulkIndex(Iterable<T> documents) {
+        long counter = 0;
+        int bad = 0;
         for(var document : documents) {
+            if(document == null) {
+                System.out.println(bad++ + " documents are null");
+                continue;
+            }
+
             addDocument(document);
 
             //Every N items
@@ -58,6 +67,8 @@ public class ElasticIndexer implements PDocumentIndexer {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                System.out.println("N of indexed documents: " + counter);
             }
         }
 

@@ -23,6 +23,7 @@ co/empathy/academy/demo_search/ports/queries/adapters/DefaultState.class
 co/empathy/academy/demo_search/ports/requests/commands/SearchCommand.class
 co/empathy/academy/demo_search/DemoSearchApplication.class
 co/empathy/academy/demo_search/model/Movie.class
+co/empathy/academy/demo_search/ports/index/Indexable.class
 co/empathy/academy/demo_search/configuration/ElasticConfig.class
 co/empathy/academy/demo_search/ports/requests/commands/search/GenreSearchCommand.class
 co/empathy/academy/demo_search/ports/executors/PQueryExecutor.class

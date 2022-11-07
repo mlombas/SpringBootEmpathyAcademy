@@ -2,6 +2,7 @@ package co.empathy.academy.demo_search.hexagon;
 
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.empathy.academy.demo_search.ports.executors.PQueryExecutor;
+import co.empathy.academy.demo_search.ports.index.Indexable;
 import co.empathy.academy.demo_search.ports.index.IndexerSettings;
 import co.empathy.academy.demo_search.ports.index.PDocumentIndexer;
 import co.empathy.academy.demo_search.ports.queries.PQueryBuilder;
@@ -33,8 +34,13 @@ public class Boundary implements PRequestReactor {
         return c.getFuture();
     }
 
-    @Override
-    public <T> void reactToDocument(DocumentCommand<T> c) {
-        c.getDocuments();
+    public <T extends Indexable> void reactToDocument(DocumentCommand<T> c) {
+        indexer.setSettings(
+                new IndexerSettings(
+                        20000,
+                        "movies"
+                )
+        );
+        indexer.bulkIndex(c.getDocuments());
     }
 }
