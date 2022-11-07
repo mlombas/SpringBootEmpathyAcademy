@@ -51,13 +51,8 @@ public class ElasticIndexer implements PDocumentIndexer {
     @Override
     public <T extends Indexable> void bulkIndex(Iterable<T> documents) {
         long counter = 0;
-        int bad = 0;
         for(var document : documents) {
-            if(document == null) {
-                System.out.println(bad++ + " documents are null");
-                continue;
-            }
-
+            if(document == null) continue;
             addDocument(document);
 
             //Every N items

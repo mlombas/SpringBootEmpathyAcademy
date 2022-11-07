@@ -83,6 +83,11 @@ public class TSVReader<T> implements Iterable<T> {
             );
         }
 
+        if(result == null)
+        {
+            headers.forEach(System.out::println);
+            line.forEach(System.out::println);
+        }
         return result;
     }
 
@@ -106,6 +111,7 @@ public class TSVReader<T> implements Iterable<T> {
                     result = reader.extractLine();
                     break;
                 } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             return result;

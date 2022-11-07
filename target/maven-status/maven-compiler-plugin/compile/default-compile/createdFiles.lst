@@ -15,7 +15,9 @@ co/empathy/academy/demo_search/ports/index/PDocumentIndexer.class
 co/empathy/academy/demo_search/ports/index/adapters/ElasticIndexer.class
 co/empathy/academy/demo_search/ports/queries/adapters/MustState.class
 co/empathy/academy/demo_search/ports/requests/senders/DocumentController.class
+co/empathy/academy/demo_search/ports/index/adapters/MultiThreadedElasticIndexer.class
 co/empathy/academy/demo_search/ports/queries/PQueryBuilder.class
+co/empathy/academy/demo_search/ports/index/adapters/MultiThreadedElasticIndexer$1.class
 co/empathy/academy/demo_search/ports/queries/adapters/ElasticStateException.class
 co/empathy/academy/demo_search/configuration/Config.class
 co/empathy/academy/demo_search/ports/queries/adapters/MultiMatchState.class
