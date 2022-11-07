@@ -3,6 +3,8 @@ package co.empathy.academy.demo_search.configuration;
 import co.empathy.academy.demo_search.hexagon.Boundary;
 import co.empathy.academy.demo_search.ports.executors.PQueryExecutor;
 import co.empathy.academy.demo_search.ports.executors.adapters.ElasticQueryExecutor;
+import co.empathy.academy.demo_search.ports.index.PDocumentIndexer;
+import co.empathy.academy.demo_search.ports.index.adapters.ElasticIndexer;
 import co.empathy.academy.demo_search.ports.queries.PQueryBuilder;
 import co.empathy.academy.demo_search.ports.queries.adapters.ElasticQueryBuilder;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
@@ -23,7 +25,9 @@ public class Config {
         return new ElasticQueryBuilder();
     }
     @Bean
-    public PRequestReactor requestReactor(PQueryBuilder builder, PQueryExecutor executor) {
-        return new Boundary(builder, executor);
+    public PDocumentIndexer documentIndexer() { return new ElasticIndexer();}
+    @Bean
+    public PRequestReactor requestReactor(PQueryBuilder builder, PQueryExecutor executor, PDocumentIndexer indexer) {
+        return new Boundary(builder, executor, indexer);
     }
 }

@@ -4,6 +4,6 @@ import co.empathy.academy.demo_search.model.Movie;
 
 import java.util.List;
 
-public interface DocumentCommand {
-    List<Movie> getMovies();
+public interface DocumentCommand<T> {
+    List<T> getDocuments();
 }

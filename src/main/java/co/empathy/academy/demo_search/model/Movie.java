@@ -13,12 +13,13 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(force = true)
 @Value
 public class Movie {
-    private String type;
+    private String tconst;
+    private String titleType;
     private String primaryTitle;
     private String originalTitle;
-    private boolean adult;
+    private Boolean isAdult;
     private String startYear;
     @Nullable private String endYear;
-    private int runtimeMinutes;
+    private Integer runtimeMinutes;
     private List<String> genres;
 }

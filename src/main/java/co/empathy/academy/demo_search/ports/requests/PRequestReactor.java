@@ -13,7 +13,7 @@ public interface PRequestReactor {
     /**
      * Sends the command to react to
      * @param c the command to send ot the boundary
-     *          z
+     * @return A future list of the thing to search
      */
     public <T> CompletableFuture<List<T>> reactToSearch(SearchCommand<T> c);
 
@@ -21,5 +21,5 @@ public interface PRequestReactor {
      * Sends the command to react to
      * @param c the command to send out at the boundary
      */
-    public void reactToDocument(DocumentCommand<T> c);
+    public <T> void reactToDocument(DocumentCommand<T> c);
 }

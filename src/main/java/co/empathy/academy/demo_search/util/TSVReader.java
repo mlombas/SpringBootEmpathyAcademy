@@ -3,24 +3,35 @@ package co.empathy.academy.demo_search.util;
 import org.elasticsearch.search.aggregations.metrics.InternalHDRPercentiles;
 
 import java.io.*;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.lang.reflect.*;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TSVReader<T> implements Iterable<T> {
-    Class<T> clazz;
+    private final List<String> listNames;
+    private final Class<T> clazz;
 
-    BufferedReader reader;
-    List<String> headers;
+    private BufferedReader reader;
+    private final List<String> headers;
 
-    public TSVReader(File file, Class<T> clazz) throws IOException {
+    public TSVReader(
+            File file,
+            Class<T> clazz,
+            String... listNames
+    ) throws IOException {
+        this(file, clazz, Arrays.stream(listNames).toList());
+    }
+    public TSVReader(
+            File file,
+            Class<T> clazz,
+            List<String> listNames
+    ) throws IOException {
         this.clazz = clazz;
+        this.listNames = listNames;
 
         reader = new BufferedReader(
                 new FileReader(file)
@@ -39,30 +50,36 @@ public class TSVReader<T> implements Iterable<T> {
     private T convertLine(List<String> line)
             throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException
     {
+        headers.stream().forEach(System.out::println);
+        line.stream().forEach(System.out::println);
         //Lotta reflection and such
-        List<Method> setters = Arrays.stream(clazz.getDeclaredMethods())
-                .filter(method -> method.getName().contains("set"))
-                .collect(Collectors.toList());
-
         T result = clazz.getDeclaredConstructor().newInstance();
         for(int i = 0; i < line.size(); i++) {
             String name = headers.get(i);
-            String value = line.get(i);
+            Object value = line.get(i);
 
-            //Get the setter that contains the name of the field
-            Method method = setters.stream()
-                    .filter(m ->
-                            m.getName().contains(name)
-                    )
-                    .findFirst().get();
+            //Get the field
+            Field field = Arrays.stream(clazz.getDeclaredFields())
+                    .filter(f ->
+                            f.getName().toLowerCase()
+                                    .contains(name.toLowerCase())
+                    ).findFirst().get();
 
-            //Invoke it trying to convert parameter from string
-            method.invoke(
+            //Convert value to the type requested
+            //TODO: fix this, make it more generic
+            if(listNames.contains(name))
+                value = Arrays.stream(name.split(",")).toList();
+            else
+                value = field
+                        .getType()
+                        .getDeclaredConstructor(String.class)
+                        .newInstance(value);
+
+            //Set the field, it is final so we need to make it accesible
+            field.setAccessible(true);
+            field.set(
                     result,
-                    method.getParameters()[0]
-                    .getType()
-                    .getDeclaredConstructor(String.class)
-                    .newInstance(value)
+                    value
             );
         }
 
