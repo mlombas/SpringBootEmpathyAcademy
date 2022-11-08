@@ -12,6 +12,7 @@ co/empathy/academy/demo_search/ports/requests/commands/document/BulkIndexCommand
 co/empathy/academy/demo_search/ports/index/IndexerSettings.class
 co/empathy/academy/demo_search/hexagon/Boundary.class
 co/empathy/academy/demo_search/ports/index/PDocumentIndexer.class
+co/empathy/academy/demo_search/configuration/Files.class
 co/empathy/academy/demo_search/ports/index/adapters/ElasticIndexer.class
 co/empathy/academy/demo_search/ports/queries/adapters/MustState.class
 co/empathy/academy/demo_search/ports/requests/senders/DocumentController.class
