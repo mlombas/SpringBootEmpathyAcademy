@@ -18,7 +18,7 @@ public class InTitleSearchCommand implements SearchCommand<Movie> {
     }
 
     @Override
-    public Query build(PQueryBuilder builder) {
+    public Query buildQuery(PQueryBuilder builder) {
         return builder.multi(
                 intitle,
                 "primaryTitle", "originalTitle"
