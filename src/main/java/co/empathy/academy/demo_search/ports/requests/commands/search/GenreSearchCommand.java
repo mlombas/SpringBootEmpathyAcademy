@@ -8,7 +8,7 @@ import co.empathy.academy.demo_search.ports.requests.commands.SearchCommand;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class GenreSearchCommand implements SearchCommand<Movie> {
+public class GenreSearchCommand extends DefaultSearchCommand<Movie> {
 
     private final List<String> genres;
     private final boolean and;

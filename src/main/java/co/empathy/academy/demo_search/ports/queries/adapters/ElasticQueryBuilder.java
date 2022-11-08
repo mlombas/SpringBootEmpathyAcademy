@@ -43,6 +43,12 @@ public class ElasticQueryBuilder implements PQueryBuilder {
     }
 
     @Override
+    public PQueryBuilder all() {
+        this.state = this.state.all();
+        return this;
+    }
+
+    @Override
     public Query build() {
         Query q = state.build();
 

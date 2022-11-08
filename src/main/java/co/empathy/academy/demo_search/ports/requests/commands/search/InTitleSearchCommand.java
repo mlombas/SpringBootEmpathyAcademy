@@ -8,7 +8,7 @@ import co.empathy.academy.demo_search.ports.requests.commands.SearchCommand;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class InTitleSearchCommand implements SearchCommand<Movie> {
+public class InTitleSearchCommand extends DefaultSearchCommand<Movie> {
     private final String intitle;
     private CompletableFuture<List<Movie>> future;
 
