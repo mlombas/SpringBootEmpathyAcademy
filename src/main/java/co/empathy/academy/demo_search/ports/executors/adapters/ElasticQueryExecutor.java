@@ -2,6 +2,7 @@ package co.empathy.academy.demo_search.ports.executors.adapters;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
+import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.empathy.academy.demo_search.ports.executors.PQueryExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,11 @@ public class ElasticQueryExecutor implements PQueryExecutor {
     private ElasticsearchClient esClient;
 
     @Override
-    public <T> List<T> executeQuery(Query query, Class<T> clazz) {
+    public <T> List<T> executeQuery(SearchRequest sr, Class<T> clazz) {
         SearchResponse<T> response;
         try {
-            response = esClient.search(s -> s
-                    .index("movies")
-                    .query(query),
+            response = esClient.search(
+                sr,
                 clazz
             );
         } catch (IOException e) {
