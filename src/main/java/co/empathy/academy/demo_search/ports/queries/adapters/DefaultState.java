@@ -26,4 +26,9 @@ public abstract class DefaultState implements ElasticQueryBuilderState {
     public final ElasticQueryBuilderState multi(String query, String... fields) {
         return multi(query, Arrays.stream(fields).toList());
     }
+
+    @Override
+    public ElasticQueryBuilderState all() {
+        throw new ElasticStateException(this.getClass().getName(), "all");
+    }
 }
