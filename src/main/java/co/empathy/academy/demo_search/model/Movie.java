@@ -23,8 +23,10 @@ public class Movie implements Indexable {
     private Boolean isAdult;
     private String startYear;
     @Nullable private String endYear;
-    private Integer runtimeMinutes;
+    @Nullable private Integer runtimeMinutes;
     private List<String> genres;
+    @Nullable Double averageRating;
+    @Nullable Integer numVotes;
 
     @Override
     public String id() {

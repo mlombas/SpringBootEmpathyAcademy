@@ -69,11 +69,14 @@ public class TSVReader<T> implements Iterable<T> {
             //TODO: fix this, make it more generic
             if(listNames.contains(name))
                 value = Arrays.stream(((String) value).split(",")).toList();
-            else
+            else try {
                 value = field
                         .getType()
                         .getDeclaredConstructor(String.class)
                         .newInstance(value);
+            } catch (InvocationTargetException e) {
+                value = null;
+            }
 
             //Set the field, it is final so we need to make it accesible
             field.setAccessible(true);
@@ -83,11 +86,6 @@ public class TSVReader<T> implements Iterable<T> {
             );
         }
 
-        if(result == null)
-        {
-            headers.forEach(System.out::println);
-            line.forEach(System.out::println);
-        }
         return result;
     }
 
@@ -135,6 +133,7 @@ public class TSVReader<T> implements Iterable<T> {
                     InstantiationException |
                     IllegalAccessException e
             ) {
+                e.printStackTrace();
                 return null;
             }
         }
