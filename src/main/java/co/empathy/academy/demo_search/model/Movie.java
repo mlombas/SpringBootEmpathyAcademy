@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
 @Value
+@With
 public class Movie implements Indexable {
     private String tconst;
     private String titleType;
@@ -21,8 +22,10 @@ public class Movie implements Indexable {
     private Boolean isAdult;
     private String startYear;
     @Nullable private String endYear;
-    private Integer runtimeMinutes;
+    @Nullable private Integer runtimeMinutes;
     private List<String> genres;
+    @Nullable Double averageRating;
+    @Nullable Integer numVotes;
 
     @Override
     public String getID() {

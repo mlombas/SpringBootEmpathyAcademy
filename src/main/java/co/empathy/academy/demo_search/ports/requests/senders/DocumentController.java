@@ -1,9 +1,12 @@
 package co.empathy.academy.demo_search.ports.requests.senders;
 
 import co.empathy.academy.demo_search.model.Movie;
+import co.empathy.academy.demo_search.model.Ratings;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
 import co.empathy.academy.demo_search.ports.requests.commands.DocumentCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.document.BulkIndexCommand;
+import co.empathy.academy.demo_search.ports.requests.commands.document.MultipleFileBulkIndexCommand;
+import co.empathy.academy.demo_search.util.TSVReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +24,23 @@ public class DocumentController {
     private PRequestReactor reactor;
 
     @PostMapping("/index")
-    public ResponseEntity<Movie> document(@RequestParam MultipartFile document) throws IOException {
-        Path fpath = Paths.get(".", document.getOriginalFilename());
-        document.transferTo(fpath);
+    public ResponseEntity<Movie> document(
+            @RequestParam MultipartFile basic,
+            @RequestParam MultipartFile ratings
+    ) throws IOException {
+        Path bpath = Paths.get(".", basic.getOriginalFilename());
+        basic.transferTo(bpath);
+        Path rpath = Paths.get(".", ratings.getOriginalFilename());
+        ratings.transferTo(rpath);
+
         reactor.reactToDocument(
-                new BulkIndexCommand<>(
-                        new File(fpath.toUri()),
-                        Movie.class
+                new MultipleFileBulkIndexCommand<Movie, Ratings>(
+                        (m, r) -> m
+                                .withAverageRating(r.getAverageRating())
+                                .withNumVotes(r.getNumVotes()),
+                        (m, r) -> m.getTconst().equals(r.getTconst()),
+                        new File(bpath.toUri()), new File(rpath.toUri()),
+                        Movie.class, Ratings.class
                 )
         );
 
