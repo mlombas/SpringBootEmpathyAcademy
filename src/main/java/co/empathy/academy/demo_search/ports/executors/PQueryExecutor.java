@@ -1,6 +1,7 @@
 package co.empathy.academy.demo_search.ports.executors;
 
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
+import co.elastic.clients.elasticsearch.core.SearchRequest;
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ public interface PQueryExecutor {
      * @return a list of results the query has returned
      * @param <T> the type of the result
      */
-    public <T> List<T> executeQuery(Query q, Class<T> clazz);
+    public <T> List<T> executeQuery(SearchRequest sr, Class<T> clazz);
 }

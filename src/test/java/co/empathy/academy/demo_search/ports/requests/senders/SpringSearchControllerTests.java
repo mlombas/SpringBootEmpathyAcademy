@@ -3,6 +3,7 @@ package co.empathy.academy.demo_search.ports.requests.senders;
 import co.empathy.academy.demo_search.hexagon.Boundary;
 import co.empathy.academy.demo_search.model.Movie;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
+import co.empathy.academy.demo_search.ports.requests.commands.search.SearchFilters;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -80,7 +81,7 @@ public class SpringSearchControllerTests {
 
         SpringSearchController controller = new SpringSearchController();
         ReflectionTestUtils.setField(controller, "reactor", reactor);
-        var result = controller.intitle(search);
+        var result = controller.intitle(search,null, null, null, null, null);
 
         assertEquals(result.get().getBody(), future.get());
     }
