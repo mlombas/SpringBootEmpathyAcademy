@@ -11,5 +11,7 @@ import java.util.Map;
 public interface PFilterBuilder {
     PFilterBuilder range(String field, String to, String from);
 
+    PFilterBuilder match(String field, String value);
+
     Query build();
 }

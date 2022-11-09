@@ -8,13 +8,8 @@ import co.empathy.academy.demo_search.ports.index.PDocumentIndexer;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class MultiThreadedElasticIndexer implements PDocumentIndexer {
     private final int nThreads;
@@ -74,7 +69,7 @@ public class MultiThreadedElasticIndexer implements PDocumentIndexer {
     private <T extends Indexable> void addToBuilder(T document) {
         builder.operations(op -> op.index(idx ->
                 idx.index(settings.getIndexName())
-                        .id(document.getID())
+                        .id(document.id())
                         .document(document)
                 ));
     }

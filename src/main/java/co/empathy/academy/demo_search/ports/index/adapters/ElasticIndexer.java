@@ -5,12 +5,9 @@ import co.elastic.clients.elasticsearch.core.BulkRequest;
 import co.empathy.academy.demo_search.ports.index.Indexable;
 import co.empathy.academy.demo_search.ports.index.IndexerSettings;
 import co.empathy.academy.demo_search.ports.index.PDocumentIndexer;
-import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.UUID;
 
 public class ElasticIndexer implements PDocumentIndexer {
     @Autowired
@@ -32,7 +29,7 @@ public class ElasticIndexer implements PDocumentIndexer {
     private <T extends Indexable> void addDocument(T document) {
         requestBuilder.operations(op -> op.index(idx ->
                 idx.index(settings.getIndexName())
-                        .id(document.getID())
+                        .id(document.id())
                         .document(document)
         ));
     }
