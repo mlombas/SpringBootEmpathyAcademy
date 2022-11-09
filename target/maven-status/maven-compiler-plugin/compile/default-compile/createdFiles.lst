@@ -1,4 +1,5 @@
 co/empathy/academy/demo_search/ports/executors/adapters/ElasticQueryExecutor.class
+co/empathy/academy/demo_search/ports/requests/commands/search/SearchFilters.class
 co/empathy/academy/demo_search/ports/queries/adapters/ElasticQueryBuilder.class
 co/empathy/academy/demo_search/ports/queries/adapters/ElasticQueryBuilderState.class
 co/empathy/academy/demo_search/ports/filters/PFilterBuilder.class

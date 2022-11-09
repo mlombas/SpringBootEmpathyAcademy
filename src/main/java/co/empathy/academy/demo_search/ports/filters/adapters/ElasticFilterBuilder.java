@@ -12,11 +12,11 @@ public class ElasticFilterBuilder implements PFilterBuilder {
     }
 
     @Override
-    public PFilterBuilder range(String field, String from, String to) {
+    public PFilterBuilder range(String field, Object from, Object to) {
         builder.must(b -> b.range(r ->
                 r.field(field)
-                        .from(from)
-                        .to(to)
+                        .from(from.toString())
+                        .to(to.toString())
                 ));
         return this;
     }
@@ -32,6 +32,11 @@ public class ElasticFilterBuilder implements PFilterBuilder {
 
     @Override
     public Query build() {
-        return builder.build()._toQuery();
+        Query q = builder.build()._toQuery();
+
+        //Reset builder
+        builder = new BoolQuery.Builder();
+
+        return q;
     }
 }

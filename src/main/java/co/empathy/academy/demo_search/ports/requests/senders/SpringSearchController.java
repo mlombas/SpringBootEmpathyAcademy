@@ -4,10 +4,13 @@ import co.empathy.academy.demo_search.model.Movie;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
 import co.empathy.academy.demo_search.ports.requests.commands.search.GenreSearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.search.InTitleSearchCommand;
+import co.empathy.academy.demo_search.ports.requests.commands.search.SearchFilters;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLSyntaxErrorException;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -40,9 +43,22 @@ public class SpringSearchController {
 
     @GetMapping("/intitle")
     public CompletableFuture<ResponseEntity<List<Movie>>>
-    intitle(@RequestBody String intitle) {
+    intitle(
+            @RequestBody String intitle,
+            @RequestParam(required = false) String genre,
+            @RequestParam(required = false) Integer durationMin,
+            @RequestParam(required = false) Integer durationMax,
+            @RequestParam(required = false) Integer yearMin,
+            @RequestParam(required = false) Integer yearMax
+            ) {
+        var filters = new SearchFilters()
+                .withGenre(genre)
+                .withDurationMin(durationMin)
+                .withDurationMax(durationMax)
+                .withYearMin(yearMin)
+                .withYearMax(yearMax);
         return reactor.reactToSearch(
-                        new InTitleSearchCommand(intitle)
+                        new InTitleSearchCommand(intitle, filters)
                 )
                 .thenApply(m ->
                         ResponseEntity.ok(m)

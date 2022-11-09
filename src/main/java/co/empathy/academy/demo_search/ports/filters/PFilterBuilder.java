@@ -9,7 +9,7 @@ import lombok.With;
 import java.util.Map;
 
 public interface PFilterBuilder {
-    PFilterBuilder range(String field, String to, String from);
+    PFilterBuilder range(String field, Object to, Object from);
 
     PFilterBuilder match(String field, String value);
 
