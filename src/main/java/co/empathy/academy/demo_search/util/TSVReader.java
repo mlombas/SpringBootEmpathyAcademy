@@ -68,7 +68,7 @@ public class TSVReader<T> implements Iterable<T> {
             //Convert value to the type requested
             //TODO: fix this, make it more generic
             if(listNames.contains(name))
-                value = Arrays.stream(name.split(",")).toList();
+                value = Arrays.stream(((String) value).split(",")).toList();
             else
                 value = field
                         .getType()
