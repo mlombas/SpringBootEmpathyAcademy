@@ -1,5 +1,7 @@
 package co.empathy.academy.demo_search.ports.queries.adapters;
 
+import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
+
 import java.util.Arrays;
 import java.util.List;
 

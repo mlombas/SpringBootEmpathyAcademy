@@ -3,7 +3,7 @@ package co.empathy.academy.demo_search.hexagon;
 import co.elastic.clients.elasticsearch._types.aggregations.Aggregation;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
-import co.empathy.academy.demo_search.ports.aggregations.PAggregationBuilder;
+import co.empathy.academy.demo_search.ports.filters.PFilterBuilder;
 import co.empathy.academy.demo_search.ports.executors.PQueryExecutor;
 import co.empathy.academy.demo_search.ports.index.Indexable;
 import co.empathy.academy.demo_search.ports.index.IndexerSettings;
@@ -25,7 +25,7 @@ import java.util.concurrent.CompletableFuture;
 @AllArgsConstructor
 public class Boundary implements PRequestReactor {
     private PQueryBuilder queryBuilder;
-    private PAggregationBuilder aggregationBuilder;
+    private PFilterBuilder filterBuilder;
 
     private PQueryExecutor queryExecutor;
 
@@ -33,13 +33,13 @@ public class Boundary implements PRequestReactor {
 
     @Override
     public <T> CompletableFuture<List<T>> reactToSearch(SearchCommand<T> c) {
-        Query q = c.buildQuery(queryBuilder);
-        Map<String, Aggregation> aggs =
-                c.buildAggregagtion(aggregationBuilder);
+        Query query = c.buildQuery(queryBuilder);
+        Query filter =
+                c.buildFilter(filterBuilder);
         SearchRequest sr = new SearchRequest.Builder()
                 .index("movies")
-                .query(q)
-                .aggregations(aggs)
+                .query(query)
+                .postFilter(filter)
                 .build();
         c.accept(
                 queryExecutor.executeQuery(sr, c.getInnerClass())
