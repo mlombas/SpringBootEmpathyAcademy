@@ -38,8 +38,15 @@ public interface PQueryBuilder {
     PQueryBuilder multi(String query, String... fields);
 
     /**
+     * Starts a "match all" type query
+     * @return PQueryBuilder for fluid interface
+     */
+    PQueryBuilder all();
+
+    /**
      * Builds the query
      * @return the query built
      */
     Query build();
+
 }

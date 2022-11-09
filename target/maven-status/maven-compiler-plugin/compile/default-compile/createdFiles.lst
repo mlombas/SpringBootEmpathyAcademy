@@ -1,6 +1,8 @@
 co/empathy/academy/demo_search/ports/executors/adapters/ElasticQueryExecutor.class
+co/empathy/academy/demo_search/ports/requests/commands/search/SearchFilters.class
 co/empathy/academy/demo_search/ports/queries/adapters/ElasticQueryBuilder.class
 co/empathy/academy/demo_search/ports/queries/adapters/ElasticQueryBuilderState.class
+co/empathy/academy/demo_search/ports/filters/PFilterBuilder.class
 co/empathy/academy/demo_search/ports/requests/senders/SpringSearchController.class
 co/empathy/academy/demo_search/ports/requests/PRequestReactor.class
 co/empathy/academy/demo_search/ports/queries/adapters/ShouldState.class
@@ -19,6 +21,7 @@ co/empathy/academy/demo_search/ports/requests/senders/DocumentController.class
 co/empathy/academy/demo_search/ports/index/adapters/MultiThreadedElasticIndexer.class
 co/empathy/academy/demo_search/ports/queries/PQueryBuilder.class
 co/empathy/academy/demo_search/ports/index/adapters/MultiThreadedElasticIndexer$1.class
+co/empathy/academy/demo_search/ports/filters/adapters/ElasticFilterBuilder.class
 co/empathy/academy/demo_search/ports/queries/adapters/ElasticStateException.class
 co/empathy/academy/demo_search/configuration/Config.class
 co/empathy/academy/demo_search/ports/queries/adapters/MultiMatchState.class
@@ -27,7 +30,9 @@ co/empathy/academy/demo_search/ports/requests/commands/SearchCommand.class
 co/empathy/academy/demo_search/DemoSearchApplication.class
 co/empathy/academy/demo_search/model/Movie.class
 co/empathy/academy/demo_search/ports/index/Indexable.class
+co/empathy/academy/demo_search/ports/queries/adapters/MatchAllState.class
 co/empathy/academy/demo_search/configuration/ElasticConfig.class
 co/empathy/academy/demo_search/ports/requests/commands/search/GenreSearchCommand.class
 co/empathy/academy/demo_search/ports/executors/PQueryExecutor.class
+co/empathy/academy/demo_search/ports/requests/commands/search/DefaultSearchCommand.class
 co/empathy/academy/demo_search/util/TSVReader$TSVIterator.class

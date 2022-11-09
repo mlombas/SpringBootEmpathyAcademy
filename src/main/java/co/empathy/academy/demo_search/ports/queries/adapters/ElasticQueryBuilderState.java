@@ -12,6 +12,7 @@ public interface ElasticQueryBuilderState {
     Query build();
 
     ElasticQueryBuilderState multi(String query, List<String> fields);
-
     ElasticQueryBuilderState multi(String query, String... fields);
+
+    ElasticQueryBuilderState all();
 }

@@ -22,6 +22,11 @@ public class BaseState extends DefaultState {
     }
 
     @Override
+    public ElasticQueryBuilderState all() {
+        return new MatchAllState();
+    }
+
+    @Override
     public Query build() {
         throw new ElasticStateException("Base", "build");
     }

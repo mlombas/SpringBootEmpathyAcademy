@@ -3,16 +3,18 @@ package co.empathy.academy.demo_search.model;
 import co.empathy.academy.demo_search.ports.index.Indexable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
 @Value
+@With
+@JsonIgnoreProperties(
+        //Neccesary as for id method of interface "Indexable"
+        value = { "id" }
+)
 public class Movie implements Indexable {
     private String tconst;
     private String titleType;
@@ -25,7 +27,7 @@ public class Movie implements Indexable {
     private List<String> genres;
 
     @Override
-    public String getID() {
+    public String id() {
         return tconst;
     }
 }
