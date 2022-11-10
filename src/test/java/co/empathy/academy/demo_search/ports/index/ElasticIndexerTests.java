@@ -2,8 +2,7 @@ package co.empathy.academy.demo_search.ports.index;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.BulkRequest;
-import co.elastic.clients.util.MissingRequiredPropertyException;
-import co.empathy.academy.demo_search.model.Movie;
+import co.empathy.academy.demo_search.model.Title;
 import co.empathy.academy.demo_search.ports.index.adapters.ElasticIndexer;
 import co.empathy.academy.demo_search.util.IterableCounter;
 import org.junit.jupiter.api.Test;
@@ -29,7 +28,7 @@ public class ElasticIndexerTests {
         ));
         ReflectionTestUtils.setField(indexer, "esClient", mockEsClient);
 
-        indexer.indexOne(new Movie());
+        indexer.indexOne(new Title());
         verify(mockEsClient, times(1)).bulk((BulkRequest) any());
     }
 
@@ -38,7 +37,7 @@ public class ElasticIndexerTests {
         var mockEsClient = mock(ElasticsearchClient.class);
 
         final var nDocs = 100;
-        var counter = new IterableCounter<Movie>(() -> new Movie(), nDocs);
+        var counter = new IterableCounter<Title>(() -> new Title(), nDocs);
         var indexer = new ElasticIndexer();
         indexer.setSettings(new IndexerSettings(
                 nDocs, "test"

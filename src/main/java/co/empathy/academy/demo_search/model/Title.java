@@ -15,7 +15,7 @@ import java.util.List;
         //Neccesary as for id method of interface "Indexable"
         value = { "id" }
 )
-public class Movie implements Indexable {
+public class Title implements Indexable {
     private String tconst;
     private String titleType;
     private String primaryTitle;
@@ -23,8 +23,10 @@ public class Movie implements Indexable {
     private Boolean isAdult;
     private String startYear;
     @Nullable private String endYear;
-    private Integer runtimeMinutes;
+    @Nullable private Integer runtimeMinutes;
     private List<String> genres;
+    @Nullable Double averageRating;
+    @Nullable Integer numVotes;
 
     @Override
     public String id() {
