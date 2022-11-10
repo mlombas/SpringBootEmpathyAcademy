@@ -1,17 +1,19 @@
 package co.empathy.academy.demo_search.ports.requests.senders;
 
-import co.empathy.academy.demo_search.model.Movie;
+import co.empathy.academy.demo_search.model.Title;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
+import co.empathy.academy.demo_search.ports.requests.commands.search.AllSearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.search.GenreSearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.search.InTitleSearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.search.SearchFilters;
-import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLSyntaxErrorException;
+import javax.annotation.Nullable;
+import javax.validation.constraints.Null;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
@@ -21,11 +23,49 @@ public class SpringSearchController {
     @Autowired
     private PRequestReactor reactor;
 
+    @GetMapping
+    public CompletableFuture<ResponseEntity<List<Title>>>
+    search(
+            @Nullable @RequestParam List<String> genres,
+
+            @Nullable @RequestParam Integer minYear,
+            @Nullable @RequestParam Integer maxYear,
+
+            @Nullable @RequestParam Integer minMinutes,
+            @Nullable @RequestParam Integer maxMinutes,
+
+            @Nullable @RequestParam Float minScore,
+            @Nullable @RequestParam Float maxScore,
+
+            @Nullable @RequestParam String type
+    )
+    {
+        CompletableFuture<List<Title>> titles = reactor.reactToSearch(
+                new AllSearchCommand(
+                        Optional.ofNullable(genres),
+
+                        Optional.ofNullable(minYear),
+                        Optional.ofNullable(maxYear),
+
+                        Optional.ofNullable(minMinutes),
+                        Optional.ofNullable(maxMinutes),
+
+                        Optional.ofNullable(minScore),
+                        Optional.ofNullable(maxScore),
+
+                        Optional.ofNullable(type)
+                )
+        );
+
+        return titles
+                .thenApply(t -> ResponseEntity.ok(t));
+    }
+
     @GetMapping("/genres/{and}")
-    public CompletableFuture<ResponseEntity<List<Movie>>>
+    public CompletableFuture<ResponseEntity<List<Title>>>
     genres(@PathVariable boolean and, @RequestBody List<String> genres)
     {
-        CompletableFuture<List<Movie>> movies = reactor.reactToSearch(
+        CompletableFuture<List<Title>> movies = reactor.reactToSearch(
                 new GenreSearchCommand(genres, and)
         );
 
@@ -35,14 +75,14 @@ public class SpringSearchController {
                 );
     }
     @GetMapping("/genres")
-    public CompletableFuture<ResponseEntity<List<Movie>>>
+    public CompletableFuture<ResponseEntity<List<Title>>>
     genres(@RequestBody List<String> genres)
     {
         return genres(true, genres);
     }
 
     @GetMapping("/intitle")
-    public CompletableFuture<ResponseEntity<List<Movie>>>
+    public CompletableFuture<ResponseEntity<List<Title>>>
     intitle(
             @RequestBody String intitle,
             @RequestParam(required = false) String genre,

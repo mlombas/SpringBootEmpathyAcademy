@@ -15,7 +15,7 @@ import java.util.List;
         //Neccesary as for id method of interface "Indexable"
         value = { "id" }
 )
-public class Movie implements Indexable {
+public class Title implements Indexable {
     private String tconst;
     private String titleType;
     private String primaryTitle;

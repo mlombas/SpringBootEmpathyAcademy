@@ -1,11 +1,8 @@
 package co.empathy.academy.demo_search.ports.requests.senders;
 
-import co.empathy.academy.demo_search.model.Movie;
+import co.empathy.academy.demo_search.model.Title;
 import co.empathy.academy.demo_search.model.Ratings;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
-import co.empathy.academy.demo_search.ports.requests.commands.DocumentCommand;
-import co.empathy.academy.demo_search.ports.requests.commands.document.BulkIndexCommand;
-import co.empathy.academy.demo_search.ports.requests.commands.document.MultipleFileBulkIndexCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.document.PipelineIndexCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.document.pipelines.DocumentZipperPipe;
 import co.empathy.academy.demo_search.util.TSVReader;
@@ -27,7 +24,7 @@ public class DocumentController {
     private PRequestReactor reactor;
 
     @PostMapping("/")
-    public ResponseEntity<Movie> document(
+    public ResponseEntity<Title> document(
             @RequestParam MultipartFile basic,
             @RequestParam MultipartFile ratings
     ) throws IOException {
@@ -36,15 +33,15 @@ public class DocumentController {
         Path rpath = Paths.get(".", ratings.getOriginalFilename());
         ratings.transferTo(rpath);
 
-        var command = new PipelineIndexCommand<Movie>(
+        var command = new PipelineIndexCommand<Title>(
                 new TSVReader<>(
                         new File(bpath.toUri()),
-                        Movie.class,
+                        Title.class,
                         "genres"
                 )
         );
         command.addPipe(
-                new DocumentZipperPipe<Movie, Ratings>(
+                new DocumentZipperPipe<Title, Ratings>(
                         (m, r) -> m
                                 .withAverageRating(r.getAverageRating())
                                 .withNumVotes(r.getNumVotes()),
