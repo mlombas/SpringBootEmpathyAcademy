@@ -21,6 +21,8 @@ public class AllSearchCommand extends DefaultSearchCommand<Title> {
     private final Optional<Integer> maxYear;
     private final Optional<Integer> minMinutes;
     private final Optional<Integer> maxMinutes;
+    private final Optional<Float> minScore;
+    private final Optional<Float> maxScore;
     private final Optional<String> type;
 
     @Override
@@ -30,7 +32,7 @@ public class AllSearchCommand extends DefaultSearchCommand<Title> {
 
         if(type.isPresent())
             builder = builder.match("titleType", type.get());
-        
+
         return builder
                 .range(
                         "startYear",
@@ -41,6 +43,11 @@ public class AllSearchCommand extends DefaultSearchCommand<Title> {
                         "runtimeMinutes",
                         minMinutes.orElse(0),
                         maxMinutes.orElse(Integer.MAX_VALUE)
+                )
+                .range(
+                        "averageRating",
+                        minScore.orElse(0f),
+                        maxScore.orElse(Float.MAX_VALUE)
                 )
                 .build();
     }

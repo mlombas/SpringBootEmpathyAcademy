@@ -34,6 +34,9 @@ public class SpringSearchController {
             @Nullable @RequestParam Integer minMinutes,
             @Nullable @RequestParam Integer maxMinutes,
 
+            @Nullable @RequestParam Float minScore,
+            @Nullable @RequestParam Float maxScore,
+
             @Nullable @RequestParam String type
     )
     {
@@ -46,6 +49,9 @@ public class SpringSearchController {
 
                         Optional.ofNullable(minMinutes),
                         Optional.ofNullable(maxMinutes),
+
+                        Optional.ofNullable(minScore),
+                        Optional.ofNullable(maxScore),
 
                         Optional.ofNullable(type)
                 )
