@@ -14,6 +14,8 @@ public class DocumentZipperPipe<T, TZ> implements Pipe<T> {
     private final BiPredicate<T,TZ> predicate;
     private final Iterator<TZ> iterator;
 
+    private TZ current;
+
     public DocumentZipperPipe(
             BiFunction<T, TZ, T> zipper,
             BiPredicate<T, TZ> predicate,
@@ -22,19 +24,30 @@ public class DocumentZipperPipe<T, TZ> implements Pipe<T> {
         this.zipper = zipper;
         this.predicate = predicate;
         this.iterator = iterable.iterator();
+        this.current = iterator.next();
     }
 
     @Override
     public T pipe(T base) {
-        if(iterator.hasNext()) {
-            TZ current;
-            do {
-                current = iterator.next();
-            } while(
-                    iterator.hasNext() &&
-                    !predicate.test(base, current)
-            );
+        while(
+                iterator.hasNext() &&
+                !predicate.test(base, current)
+        ) {
+            current = iterator.next();
+        }
+
+        if(!predicate.test(base, current)) return base;
+
+        while(
+                predicate.test(base, current) &&
+                iterator.hasNext()
+        ) {
+            base = zipper.apply(base, current);
+            current = iterator.next();
+        }
+
+        if(predicate.test(base, current))
             return zipper.apply(base, current);
-        } else return base;
+        return base;
     }
 }
