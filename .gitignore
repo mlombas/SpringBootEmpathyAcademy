@@ -2,6 +2,9 @@
 *.swp
 *.swo
 
+#TSV
+*.tsv
+
 .DS_Store
 
 # Maven (from: https://github.com/github/gitignore/blob/master/Maven.gitignore)
