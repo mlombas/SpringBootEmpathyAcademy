@@ -27,17 +27,27 @@ public class SpringSearchController {
     public CompletableFuture<ResponseEntity<List<Title>>>
     search(
             @Nullable @RequestParam List<String> genres,
+
             @Nullable @RequestParam Integer minYear,
-            @Nullable @RequestParam Integer maxYear
+            @Nullable @RequestParam Integer maxYear,
+
+            @Nullable @RequestParam Integer minMinutes,
+            @Nullable @RequestParam Integer maxMinutes,
+
+            @Nullable @RequestParam String type
     )
     {
-        System.out.println(minYear);
-        System.out.println(maxYear);
         CompletableFuture<List<Title>> titles = reactor.reactToSearch(
                 new AllSearchCommand(
                         Optional.ofNullable(genres),
+
                         Optional.ofNullable(minYear),
-                        Optional.ofNullable(maxYear)
+                        Optional.ofNullable(maxYear),
+
+                        Optional.ofNullable(minMinutes),
+                        Optional.ofNullable(maxMinutes),
+
+                        Optional.ofNullable(type)
                 )
         );
 
