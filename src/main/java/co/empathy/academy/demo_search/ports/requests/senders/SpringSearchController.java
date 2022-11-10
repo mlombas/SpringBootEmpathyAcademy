@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Nullable;
+import javax.validation.constraints.Null;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
@@ -22,10 +25,20 @@ public class SpringSearchController {
 
     @GetMapping
     public CompletableFuture<ResponseEntity<List<Title>>>
-    search()
+    search(
+            @Nullable @RequestParam List<String> genres,
+            @Nullable @RequestParam Integer minYear,
+            @Nullable @RequestParam Integer maxYear
+    )
     {
+        System.out.println(minYear);
+        System.out.println(maxYear);
         CompletableFuture<List<Title>> titles = reactor.reactToSearch(
-                new AllSearchCommand()
+                new AllSearchCommand(
+                        Optional.ofNullable(genres),
+                        Optional.ofNullable(minYear),
+                        Optional.ofNullable(maxYear)
+                )
         );
 
         return titles
