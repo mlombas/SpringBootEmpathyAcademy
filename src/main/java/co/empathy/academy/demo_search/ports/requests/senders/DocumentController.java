@@ -15,12 +15,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @RestController
-@RequestMapping("/document")
+@RequestMapping("/index")
 public class DocumentController {
     @Autowired
     private PRequestReactor reactor;
 
-    @PostMapping("/index")
+    @PostMapping("/")
     public ResponseEntity<Movie> document(@RequestParam MultipartFile document) throws IOException {
         Path fpath = Paths.get(".", document.getOriginalFilename());
         document.transferTo(fpath);
