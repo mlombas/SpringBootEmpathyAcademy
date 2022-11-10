@@ -2,6 +2,7 @@ package co.empathy.academy.demo_search.ports.requests.senders;
 
 import co.empathy.academy.demo_search.model.Title;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
+import co.empathy.academy.demo_search.ports.requests.commands.search.AllSearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.search.GenreSearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.search.InTitleSearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.search.SearchFilters;
@@ -19,11 +20,16 @@ public class SpringSearchController {
     @Autowired
     private PRequestReactor reactor;
 
-    @GetMapping("/")
+    @GetMapping
     public CompletableFuture<ResponseEntity<List<Title>>>
     search()
     {
-        CompletableFuture<List<Title>>
+        CompletableFuture<List<Title>> titles = reactor.reactToSearch(
+                new AllSearchCommand()
+        );
+
+        return titles
+                .thenApply(t -> ResponseEntity.ok(t));
     }
 
     @GetMapping("/genres/{and}")
