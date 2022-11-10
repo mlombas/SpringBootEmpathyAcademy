@@ -19,6 +19,8 @@ co/empathy/academy/demo_search/hexagon/Boundary.class
 co/empathy/academy/demo_search/ports/index/PDocumentIndexer.class
 co/empathy/academy/demo_search/configuration/Files.class
 co/empathy/academy/demo_search/ports/index/adapters/ElasticIndexer.class
+co/empathy/academy/demo_search/ports/requests/commands/document/PipelineIndexCommand$1$1.class
+co/empathy/academy/demo_search/ports/requests/commands/document/PipelineIndexCommand$1.class
 co/empathy/academy/demo_search/ports/queries/adapters/MustState.class
 co/empathy/academy/demo_search/ports/requests/senders/DocumentController.class
 co/empathy/academy/demo_search/ports/index/adapters/MultiThreadedElasticIndexer.class
@@ -29,6 +31,8 @@ co/empathy/academy/demo_search/ports/filters/adapters/ElasticFilterBuilder.class
 co/empathy/academy/demo_search/ports/queries/adapters/ElasticStateException.class
 co/empathy/academy/demo_search/configuration/Config.class
 co/empathy/academy/demo_search/ports/queries/adapters/MultiMatchState.class
+co/empathy/academy/demo_search/ports/requests/commands/document/pipelines/Pipe.class
+co/empathy/academy/demo_search/ports/requests/commands/document/pipelines/DocumentZipperPipe.class
 co/empathy/academy/demo_search/ports/queries/adapters/DefaultState.class
 co/empathy/academy/demo_search/ports/requests/commands/SearchCommand.class
 co/empathy/academy/demo_search/DemoSearchApplication.class
@@ -37,6 +41,7 @@ co/empathy/academy/demo_search/ports/index/Indexable.class
 co/empathy/academy/demo_search/ports/queries/adapters/MatchAllState.class
 co/empathy/academy/demo_search/configuration/ElasticConfig.class
 co/empathy/academy/demo_search/ports/requests/commands/search/GenreSearchCommand.class
+co/empathy/academy/demo_search/ports/requests/commands/document/PipelineIndexCommand.class
 co/empathy/academy/demo_search/ports/executors/PQueryExecutor.class
 co/empathy/academy/demo_search/ports/requests/commands/search/DefaultSearchCommand.class
 co/empathy/academy/demo_search/util/TSVReader$TSVIterator.class
