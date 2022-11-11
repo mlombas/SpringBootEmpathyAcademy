@@ -7,10 +7,7 @@ co/empathy/academy/demo_search/util/TSVReader.class
 co/empathy/academy/demo_search/ports/requests/commands/DocumentCommand.class
 co/empathy/academy/demo_search/ports/requests/commands/document/MultipleFileBulkIndexCommand$1.class
 co/empathy/academy/demo_search/hexagon/Boundary.class
-<<<<<<< Updated upstream
 co/empathy/academy/demo_search/ports/requests/commands/search/AllSearchCommand.class
-=======
->>>>>>> Stashed changes
 co/empathy/academy/demo_search/ports/index/adapters/ElasticIndexer.class
 co/empathy/academy/demo_search/ports/requests/commands/document/PipelineIndexCommand$1.class
 co/empathy/academy/demo_search/ports/queries/adapters/MustState.class
@@ -24,10 +21,7 @@ co/empathy/academy/demo_search/ports/requests/commands/SearchCommand.class
 co/empathy/academy/demo_search/ports/index/Indexable.class
 co/empathy/academy/demo_search/ports/queries/adapters/MatchAllState.class
 co/empathy/academy/demo_search/ports/requests/commands/search/DefaultSearchCommand.class
-<<<<<<< Updated upstream
 co/empathy/academy/demo_search/model/Title.class
-=======
->>>>>>> Stashed changes
 co/empathy/academy/demo_search/ports/requests/commands/search/SearchFilters.class
 co/empathy/academy/demo_search/ports/queries/adapters/ElasticQueryBuilderState.class
 co/empathy/academy/demo_search/ports/requests/PRequestReactor.class
@@ -47,10 +41,6 @@ co/empathy/academy/demo_search/ports/queries/adapters/ElasticStateException.clas
 co/empathy/academy/demo_search/ports/queries/adapters/MultiMatchState.class
 co/empathy/academy/demo_search/ports/requests/commands/document/pipelines/DocumentZipperPipe.class
 co/empathy/academy/demo_search/DemoSearchApplication.class
-<<<<<<< Updated upstream
-=======
-co/empathy/academy/demo_search/model/Movie.class
->>>>>>> Stashed changes
 co/empathy/academy/demo_search/configuration/ElasticConfig.class
 co/empathy/academy/demo_search/ports/requests/commands/search/GenreSearchCommand.class
 co/empathy/academy/demo_search/ports/requests/commands/document/PipelineIndexCommand.class
