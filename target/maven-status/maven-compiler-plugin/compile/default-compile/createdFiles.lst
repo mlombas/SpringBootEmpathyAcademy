@@ -15,10 +15,7 @@ co/empathy/academy/demo_search/ports/requests/commands/document/MultipleFileBulk
 co/empathy/academy/demo_search/ports/index/IndexerSettings.class
 >>>>>>> main
 co/empathy/academy/demo_search/hexagon/Boundary.class
-<<<<<<< Updated upstream
 co/empathy/academy/demo_search/ports/requests/commands/search/AllSearchCommand.class
-=======
->>>>>>> Stashed changes
 co/empathy/academy/demo_search/ports/index/adapters/ElasticIndexer.class
 <<<<<<< HEAD
 =======
@@ -36,10 +33,7 @@ co/empathy/academy/demo_search/ports/requests/commands/SearchCommand.class
 co/empathy/academy/demo_search/ports/index/Indexable.class
 co/empathy/academy/demo_search/ports/queries/adapters/MatchAllState.class
 co/empathy/academy/demo_search/ports/requests/commands/search/DefaultSearchCommand.class
-<<<<<<< Updated upstream
 co/empathy/academy/demo_search/model/Title.class
-=======
->>>>>>> Stashed changes
 co/empathy/academy/demo_search/ports/requests/commands/search/SearchFilters.class
 co/empathy/academy/demo_search/ports/queries/adapters/ElasticQueryBuilderState.class
 co/empathy/academy/demo_search/ports/requests/PRequestReactor.class
@@ -71,10 +65,6 @@ co/empathy/academy/demo_search/ports/queries/adapters/DefaultState.class
 co/empathy/academy/demo_search/ports/requests/commands/SearchCommand.class
 >>>>>>> main
 co/empathy/academy/demo_search/DemoSearchApplication.class
-<<<<<<< Updated upstream
-=======
-co/empathy/academy/demo_search/model/Movie.class
->>>>>>> Stashed changes
 co/empathy/academy/demo_search/configuration/ElasticConfig.class
 co/empathy/academy/demo_search/ports/requests/commands/search/GenreSearchCommand.class
 co/empathy/academy/demo_search/ports/requests/commands/document/PipelineIndexCommand.class

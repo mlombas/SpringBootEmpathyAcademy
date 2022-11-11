@@ -6,14 +6,14 @@ import co.empathy.academy.demo_search.ports.requests.commands.search.AllSearchCo
 import co.empathy.academy.demo_search.ports.requests.commands.search.GenreSearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.search.InTitleSearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.search.SearchFilters;
+import co.empathy.academy.demo_search.ports.requests.senders.util.SearchResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.Null;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
@@ -24,7 +24,7 @@ public class SpringSearchController {
     private PRequestReactor reactor;
 
     @GetMapping
-    public CompletableFuture<ResponseEntity<List<Title>>>
+    public CompletableFuture<ResponseEntity<Map<String, Object>>>
     search(
             @Nullable @RequestParam List<String> genres,
 
@@ -58,7 +58,12 @@ public class SpringSearchController {
         );
 
         return titles
-                .thenApply(t -> ResponseEntity.ok(t));
+                .thenApply(hits -> {
+                    var response = new HashMap();
+                    response.put("hits", hits);
+                    return response;
+                })
+                .thenApply(response -> ResponseEntity.ok(response));
     }
 
     @GetMapping("/genres/{and}")
