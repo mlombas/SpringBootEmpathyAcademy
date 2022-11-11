@@ -28,6 +28,8 @@ public class ElasticQueryExecutor implements PQueryExecutor {
             response = null;
         }
 
+        response.hits().hits().forEach(System.out::println);
+
         return response.hits().hits().stream()
                 .map(Hit::source)
                 .collect(Collectors.toList());
