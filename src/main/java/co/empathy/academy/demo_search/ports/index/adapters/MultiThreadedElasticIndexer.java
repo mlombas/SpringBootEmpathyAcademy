@@ -51,19 +51,21 @@ public class MultiThreadedElasticIndexer implements PDocumentIndexer {
     }
 
     private void flushBuilder() {
-        var passedBuilder = builder;
         pool.execute(new Runnable() {
             @Override
             public void run() {
                 try {
-                    esClient.bulk(passedBuilder.build());
+                    System.out.println("INDEXIN");
+                    System.out.println(esClient);
+                    esClient.bulk(builder.build());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
+                } finally {
+                    builder = new BulkRequest.Builder();
                 }
             }
         });
 
-        builder = new BulkRequest.Builder();
     }
 
     private <T extends Indexable> void addToBuilder(T document) {

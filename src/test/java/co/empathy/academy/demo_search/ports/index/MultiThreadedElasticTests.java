@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -19,7 +20,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class MultiThreadedElasticTests {
     @Test
-    void givenAnElasticIndexer_whenIndexOne_thenEsClientHasOneRequest() throws IOException {
+    void givenAnElasticIndexer_whenIndexOne_thenEsClientHasOneRequest() throws IOException, InterruptedException {
         var mockEsClient = mock(ElasticsearchClient.class);
 
         var indexer = new MultiThreadedElasticIndexer(1);
@@ -29,11 +30,15 @@ public class MultiThreadedElasticTests {
         ReflectionTestUtils.setField(indexer, "esClient", mockEsClient);
 
         indexer.indexOne(new Title());
-        verify(mockEsClient, times(1)).bulk((BulkRequest) any());
+
+        //Wait for termination
+        Thread.sleep(100);
+
+        verify(mockEsClient).bulk((BulkRequest) any());
     }
 
     @Test
-    void givenAnElasticIndexer_whenBulkIndex_thenEsClientHasOneRequestButSendsManyDocument() throws IOException {
+    void givenAnElasticIndexer_whenBulkIndex_thenEsClientHasOneRequestButSendsManyDocument() throws IOException, InterruptedException {
         var mockEsClient = mock(ElasticsearchClient.class);
 
         final var nDocs = 100;
@@ -46,7 +51,9 @@ public class MultiThreadedElasticTests {
 
         //This sometimes throws an exception, but it works fine regardless
         indexer.bulkIndex(counter);
-        
+
+        Thread.sleep(100);
+
         assertEquals(nDocs, counter.getCount());
         verify(mockEsClient, times(1)).bulk((BulkRequest) any());
     }

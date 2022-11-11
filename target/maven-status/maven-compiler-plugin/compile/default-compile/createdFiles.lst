@@ -2,25 +2,14 @@ co/empathy/academy/demo_search/ports/executors/adapters/ElasticQueryExecutor.cla
 co/empathy/academy/demo_search/ports/queries/adapters/ElasticQueryBuilder.class
 co/empathy/academy/demo_search/ports/filters/PFilterBuilder.class
 co/empathy/academy/demo_search/ports/requests/senders/SpringSearchController.class
+co/empathy/academy/demo_search/ports/requests/senders/util/SearchResponse.class
 co/empathy/academy/demo_search/ports/queries/adapters/BaseState.class
 co/empathy/academy/demo_search/util/TSVReader.class
-co/empathy/academy/demo_search/model/Ratings.class
 co/empathy/academy/demo_search/ports/requests/commands/DocumentCommand.class
-<<<<<<< HEAD
 co/empathy/academy/demo_search/ports/requests/commands/document/MultipleFileBulkIndexCommand$1.class
-=======
-co/empathy/academy/demo_search/ports/requests/commands/document/BulkIndexCommand.class
-co/empathy/academy/demo_search/ports/requests/commands/document/MultipleFileBulkIndexCommand$1$1.class
-co/empathy/academy/demo_search/ports/requests/commands/document/MultipleFileBulkIndexCommand$1.class
-co/empathy/academy/demo_search/ports/index/IndexerSettings.class
->>>>>>> main
 co/empathy/academy/demo_search/hexagon/Boundary.class
 co/empathy/academy/demo_search/ports/requests/commands/search/AllSearchCommand.class
 co/empathy/academy/demo_search/ports/index/adapters/ElasticIndexer.class
-<<<<<<< HEAD
-=======
-co/empathy/academy/demo_search/ports/requests/commands/document/PipelineIndexCommand$1$1.class
->>>>>>> main
 co/empathy/academy/demo_search/ports/requests/commands/document/PipelineIndexCommand$1.class
 co/empathy/academy/demo_search/ports/queries/adapters/MustState.class
 co/empathy/academy/demo_search/ports/requests/senders/DocumentController.class
@@ -48,22 +37,10 @@ co/empathy/academy/demo_search/configuration/Files.class
 co/empathy/academy/demo_search/ports/requests/commands/document/PipelineIndexCommand$1$1.class
 co/empathy/academy/demo_search/ports/index/adapters/MultiThreadedElasticIndexer.class
 co/empathy/academy/demo_search/ports/queries/PQueryBuilder.class
-<<<<<<< HEAD
-=======
-co/empathy/academy/demo_search/ports/requests/commands/document/MultipleFileBulkIndexCommand.class
-co/empathy/academy/demo_search/ports/index/adapters/MultiThreadedElasticIndexer$1.class
->>>>>>> main
 co/empathy/academy/demo_search/ports/filters/adapters/ElasticFilterBuilder.class
 co/empathy/academy/demo_search/ports/queries/adapters/ElasticStateException.class
 co/empathy/academy/demo_search/ports/queries/adapters/MultiMatchState.class
-<<<<<<< HEAD
 co/empathy/academy/demo_search/ports/requests/commands/document/pipelines/DocumentZipperPipe.class
-=======
-co/empathy/academy/demo_search/ports/requests/commands/document/pipelines/Pipe.class
-co/empathy/academy/demo_search/ports/requests/commands/document/pipelines/DocumentZipperPipe.class
-co/empathy/academy/demo_search/ports/queries/adapters/DefaultState.class
-co/empathy/academy/demo_search/ports/requests/commands/SearchCommand.class
->>>>>>> main
 co/empathy/academy/demo_search/DemoSearchApplication.class
 co/empathy/academy/demo_search/configuration/ElasticConfig.class
 co/empathy/academy/demo_search/ports/requests/commands/search/GenreSearchCommand.class

@@ -1,3 +1,6 @@
+/Users/mariolombas/Documents/SpringBootW2/src/test/java/co/empathy/academy/demo_search/util/IterableCounter.java
 /Users/mariolombas/Documents/SpringBootW2/src/test/java/co/empathy/academy/demo_search/DemoSearchApplicationTests.java
 /Users/mariolombas/Documents/SpringBootW2/src/test/java/co/empathy/academy/demo_search/ports/queries/ElasticQueryBuilderTests.java
 /Users/mariolombas/Documents/SpringBootW2/src/test/java/co/empathy/academy/demo_search/ports/requests/senders/SpringSearchControllerTests.java
+/Users/mariolombas/Documents/SpringBootW2/src/test/java/co/empathy/academy/demo_search/ports/index/MultiThreadedElasticTests.java
+/Users/mariolombas/Documents/SpringBootW2/src/test/java/co/empathy/academy/demo_search/ports/index/ElasticIndexerTests.java
