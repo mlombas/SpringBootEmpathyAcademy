@@ -33,7 +33,7 @@ public class Config {
     }
 
     @Bean
-    public PDocumentIndexer documentIndexer() { return new MultiThreadedElasticIndexer(4);}
+    public PDocumentIndexer documentIndexer() { return new MultiThreadedElasticIndexer(16);}
     @Bean
     public PRequestReactor requestReactor(PQueryBuilder qbuilder, PFilterBuilder fbuilder, PQueryExecutor executor, PDocumentIndexer indexer) {
         return new Boundary(qbuilder, fbuilder, executor, indexer);
