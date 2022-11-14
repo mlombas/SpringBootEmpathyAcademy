@@ -7,7 +7,13 @@ import co.empathy.academy.demo_search.ports.requests.commands.search.GenreSearch
 import co.empathy.academy.demo_search.ports.requests.commands.search.InTitleSearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.search.SearchFilters;
 import co.empathy.academy.demo_search.ports.requests.senders.util.SearchResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +29,25 @@ public class SpringSearchController {
     @Autowired
     private PRequestReactor reactor;
 
+    @Operation(summary = "Search for all movies satisfying a set of filters")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of movies found, it can be empty"),
+            @ApiResponse(responseCode = "500", description = "Error searching the movies")
+    })
+    @Parameters(value = {
+            @Parameter(name = "genres", required = false, description = "List of genres to match"),
+
+            @Parameter(name = "minYear", required = false, description = "Minimum year to match"),
+            @Parameter(name = "maxYear", required = false, description = "Maximum year to match"),
+
+            @Parameter(name = "minMinutes", required = false, description = "Minimum runtime minutes to match"),
+            @Parameter(name = "maxMinutes", required = false, description = "Maximum runtime minutes to match"),
+
+            @Parameter(name = "minScore", required = false, description = "Minimum score to match"),
+            @Parameter(name = "maxScore", required = false, description = "Maximum score to match"),
+
+            @Parameter(name = "type", required = false, description = "Type of title to match"),
+    })
     @GetMapping
     public CompletableFuture<ResponseEntity<Map<String, Object>>>
     search(
