@@ -43,7 +43,7 @@ public class DocumentController {
     @PostMapping("/")
     public ResponseEntity<Title> document(
             @RequestParam MultipartFile basics,
-            @RequestParam @Nullable Optional<MultipartFile> ratings
+            @RequestParam Optional<MultipartFile> ratings
     ) throws IOException {
         Path bpath = Paths.get(".", basics.getOriginalFilename());
         basics.transferTo(bpath);
