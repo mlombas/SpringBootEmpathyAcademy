@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 @AllArgsConstructor
-@NoArgsConstructor(force = true)
 @Value
 @With
 @JsonIgnoreProperties(
@@ -27,6 +26,21 @@ public class Title implements Indexable {
     private List<String> genres;
     @Nullable Double averageRating;
     @Nullable Integer numVotes;
+
+    public Title() {
+        tconst = null;
+        titleType = null;
+        primaryTitle = null;
+        originalTitle = null;
+        isAdult = null;
+        startYear = null;
+        endYear = null;
+        genres = null;
+
+        runtimeMinutes = 0;
+        averageRating = 0.;
+        numVotes = 0;
+    }
 
     @Override
     public String id() {

@@ -36,6 +36,7 @@ public class Boundary implements PRequestReactor {
         Query query = c.buildQuery(queryBuilder);
         Query filter =
                 c.buildFilter(filterBuilder);
+
         SearchRequest sr = new SearchRequest.Builder()
                 .index("movies")
                 .query(query)
