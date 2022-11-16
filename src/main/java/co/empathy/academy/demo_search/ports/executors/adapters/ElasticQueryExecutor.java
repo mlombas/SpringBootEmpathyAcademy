@@ -1,12 +1,15 @@
 package co.empathy.academy.demo_search.ports.executors.adapters;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.aggregations.Aggregate;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.core.search.Hit;
+import co.empathy.academy.demo_search.model.Title;
 import co.empathy.academy.demo_search.ports.executors.PQueryExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,8 +30,6 @@ public class ElasticQueryExecutor implements PQueryExecutor {
         } catch (IOException e) {
             response = null;
         }
-
-        response.hits().hits().forEach(System.out::println);
 
         return response.hits().hits().stream()
                 .map(Hit::source)
