@@ -48,10 +48,10 @@ public class SpringSearchController {
 
             @Parameter(name = "type", required = false, description = "Type of title to match"),
     })
-    @GetMapping
+    @GetMapping("/")
     public CompletableFuture<ResponseEntity<Map<String, Object>>>
     search(
-            @Nullable @RequestParam List<String> genres,
+            @Nullable @RequestParam List<String> genre,
 
             @Nullable @RequestParam Integer minYear,
             @Nullable @RequestParam Integer maxYear,
@@ -67,7 +67,7 @@ public class SpringSearchController {
     {
         CompletableFuture<List<Title>> titles = reactor.reactToSearch(
                 new AllSearchCommand(
-                        Optional.ofNullable(genres),
+                        Optional.ofNullable(genre),
 
                         Optional.ofNullable(minYear),
                         Optional.ofNullable(maxYear),
