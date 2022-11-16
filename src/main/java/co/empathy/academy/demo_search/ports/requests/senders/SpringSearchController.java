@@ -48,7 +48,6 @@ public class SpringSearchController {
 
             @Parameter(name = "type", required = false, description = "Type of title to match"),
     })
-    @CrossOrigin
     @GetMapping("/")
     public CompletableFuture<ResponseEntity<Map<String, Object>>>
     search(
