@@ -45,5 +45,6 @@ co/empathy/academy/demo_search/DemoSearchApplication.class
 co/empathy/academy/demo_search/configuration/ElasticConfig.class
 co/empathy/academy/demo_search/ports/requests/commands/search/GenreSearchCommand.class
 co/empathy/academy/demo_search/ports/requests/commands/document/PipelineIndexCommand.class
+co/empathy/academy/demo_search/configuration/CORS.class
 co/empathy/academy/demo_search/ports/executors/PQueryExecutor.class
 co/empathy/academy/demo_search/util/TSVReader$TSVIterator.class
