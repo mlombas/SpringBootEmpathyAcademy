@@ -8,9 +8,12 @@ import co.empathy.academy.demo_search.ports.filters.adapters.ElasticFilterBuilde
 import co.empathy.academy.demo_search.ports.index.PDocumentIndexer;
 import co.empathy.academy.demo_search.ports.index.adapters.ElasticIndexer;
 import co.empathy.academy.demo_search.ports.index.adapters.MultiThreadedElasticIndexer;
+import co.empathy.academy.demo_search.ports.order.POrderBuilder;
+import co.empathy.academy.demo_search.ports.order.adapters.ElasticOrderBuilder;
 import co.empathy.academy.demo_search.ports.queries.PQueryBuilder;
 import co.empathy.academy.demo_search.ports.queries.adapters.ElasticQueryBuilder;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
+import lombok.Builder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,11 +34,18 @@ public class Config {
     public PFilterBuilder filterBuilder() {
         return new ElasticFilterBuilder();
     }
+    @Bean
+    public POrderBuilder orderBuilder() {
+        return new ElasticOrderBuilder();
+    }
 
     @Bean
     public PDocumentIndexer documentIndexer() { return new MultiThreadedElasticIndexer(16);}
     @Bean
-    public PRequestReactor requestReactor(PQueryBuilder qbuilder, PFilterBuilder fbuilder, PQueryExecutor executor, PDocumentIndexer indexer) {
-        return new Boundary(qbuilder, fbuilder, executor, indexer);
+    public PRequestReactor requestReactor(
+            PQueryBuilder qbuilder, PFilterBuilder fbuilder, POrderBuilder obuilder,
+            PQueryExecutor executor, PDocumentIndexer indexer
+    ) {
+        return new Boundary(qbuilder, fbuilder, obuilder, executor, indexer);
     }
 }

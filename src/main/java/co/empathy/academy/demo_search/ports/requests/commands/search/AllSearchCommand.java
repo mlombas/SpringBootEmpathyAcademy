@@ -1,12 +1,12 @@
 package co.empathy.academy.demo_search.ports.requests.commands.search;
 
+import co.elastic.clients.elasticsearch._types.SortOptions;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.empathy.academy.demo_search.model.Title;
 import co.empathy.academy.demo_search.ports.filters.PFilterBuilder;
-import io.swagger.v3.oas.models.security.SecurityScheme;
+import co.empathy.academy.demo_search.ports.order.POrderBuilder;
 import lombok.RequiredArgsConstructor;
 
-import java.text.AttributedCharacterIterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -24,6 +24,10 @@ public class AllSearchCommand extends DefaultSearchCommand<Title> {
     private final Optional<Float> minScore;
     private final Optional<Float> maxScore;
     private final Optional<String> type;
+
+    private final Optional<POrderBuilder.Order> sortRating;
+
+    private final Integer maxNHits;
 
     @Override
     public Query buildFilter(PFilterBuilder builder) {
@@ -53,6 +57,13 @@ public class AllSearchCommand extends DefaultSearchCommand<Title> {
     }
 
     @Override
+    public List<SortOptions> buildOrder(POrderBuilder builder) {
+        if(sortRating.isPresent())
+            builder = builder.byField("averageRating", sortRating.get());
+        return builder.build();
+    }
+
+    @Override
     public CompletableFuture<List<Title>> getFuture() {
         return future;
     }
@@ -61,6 +72,9 @@ public class AllSearchCommand extends DefaultSearchCommand<Title> {
     public void accept(List<Title> returns) {
         this.future.complete(returns);
     }
+
+    @Override
+    public Integer getMaxNHits() { return maxNHits; }
 
     @Override
     public Class<Title> getInnerClass() {

@@ -1,5 +1,7 @@
 package co.empathy.academy.demo_search.hexagon;
 
+import co.elastic.clients.elasticsearch._types.SortOptions;
+import co.elastic.clients.elasticsearch._types.SortOrder;
 import co.elastic.clients.elasticsearch._types.aggregations.Aggregation;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
@@ -8,6 +10,7 @@ import co.empathy.academy.demo_search.ports.executors.PQueryExecutor;
 import co.empathy.academy.demo_search.ports.index.Indexable;
 import co.empathy.academy.demo_search.ports.index.IndexerSettings;
 import co.empathy.academy.demo_search.ports.index.PDocumentIndexer;
+import co.empathy.academy.demo_search.ports.order.POrderBuilder;
 import co.empathy.academy.demo_search.ports.queries.PQueryBuilder;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
 import co.empathy.academy.demo_search.ports.requests.commands.DocumentCommand;
@@ -26,6 +29,7 @@ import java.util.concurrent.CompletableFuture;
 public class Boundary implements PRequestReactor {
     private PQueryBuilder queryBuilder;
     private PFilterBuilder filterBuilder;
+    private POrderBuilder orderBuilder;
 
     private PQueryExecutor queryExecutor;
 
@@ -36,11 +40,14 @@ public class Boundary implements PRequestReactor {
         Query query = c.buildQuery(queryBuilder);
         Query filter =
                 c.buildFilter(filterBuilder);
+        List<SortOptions> order = c.buildOrder(orderBuilder);
 
         SearchRequest sr = new SearchRequest.Builder()
                 .index("movies")
                 .query(query)
                 .postFilter(filter)
+                .size(c.getMaxNHits())
+                .sort(order)
                 .build();
         c.accept(
                 queryExecutor.executeQuery(sr, c.getInnerClass())
