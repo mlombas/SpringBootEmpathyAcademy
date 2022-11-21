@@ -1,5 +1,7 @@
 package co.empathy.academy.demo_search.ports.requests.commands.document.pipelines;
 
+import co.empathy.academy.demo_search.model.Ratings;
+import co.empathy.academy.demo_search.model.Title;
 import co.empathy.academy.demo_search.ports.requests.commands.DocumentCommand;
 import co.empathy.academy.demo_search.util.TSVReader;
 
@@ -29,25 +31,11 @@ public class DocumentZipperPipe<T, TZ> implements Pipe<T> {
 
     @Override
     public T pipe(T base) {
-        while(
-                iterator.hasNext() &&
-                !predicate.test(base, current)
-        ) {
-            current = iterator.next();
-        }
-
         if(!predicate.test(base, current)) return base;
 
-        while(
-                predicate.test(base, current) &&
-                iterator.hasNext()
-        ) {
-            base = zipper.apply(base, current);
-            current = iterator.next();
-        }
+        T result = zipper.apply(base, current);
+        if(iterator.hasNext()) current = iterator.next();
 
-        if(predicate.test(base, current))
-            return zipper.apply(base, current);
-        return base;
+        return result;
     }
 }
