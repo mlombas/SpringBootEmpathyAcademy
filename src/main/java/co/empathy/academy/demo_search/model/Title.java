@@ -53,6 +53,7 @@ public class Title implements Indexable {
 
     public Title withOneMoreAka(Aka aka) {
         akas.add(aka);
+        akas.stream().forEach(System.out::println);
         return this;
     }
 }

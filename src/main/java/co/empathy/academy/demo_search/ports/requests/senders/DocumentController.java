@@ -81,9 +81,16 @@ public class DocumentController {
 
             command.addPipe(
                     new DocumentZipperPipe<Title, FullAka>(
-                            (m, fa) -> m
-                                    .withOneMoreAka(fa.getBaseAka()),
-                            (m, fa) -> m.getTconst().equals(fa.getTitleId()),
+                            (m, fa) -> {
+                                var newm = m
+                                        .withOneMoreAka(fa.getBaseAka());
+                                System.out.println(newm);
+                                return newm;
+                            },
+                            (m, fa) -> {
+                                System.out.println(m.getTconst() + " " + fa.getTitleId());
+                                return m.getTconst().equals(fa.getTitleId());
+                            },
                             new TSVReader<>(new File(apath.toUri()), FullAka.class)
                     )
             );
