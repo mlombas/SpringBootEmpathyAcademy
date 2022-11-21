@@ -1,6 +1,7 @@
 package co.empathy.academy.demo_search.ports.requests.senders;
 
 import co.empathy.academy.demo_search.model.Title;
+import co.empathy.academy.demo_search.ports.order.POrderBuilder;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
 import co.empathy.academy.demo_search.ports.requests.commands.search.AllSearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.search.GenreSearchCommand;
@@ -62,7 +63,11 @@ public class SpringSearchController {
             @Nullable @RequestParam Float minScore,
             @Nullable @RequestParam Float maxScore,
 
-            @Nullable @RequestParam String type
+            @Nullable @RequestParam String type,
+
+            @Nullable @RequestParam Integer maxNHits,
+
+            @Nullable @RequestParam POrderBuilder.Order sortRating
     )
     {
         CompletableFuture<List<Title>> titles = reactor.reactToSearch(
@@ -78,7 +83,11 @@ public class SpringSearchController {
                         Optional.ofNullable(minScore),
                         Optional.ofNullable(maxScore),
 
-                        Optional.ofNullable(type)
+                        Optional.ofNullable(type),
+
+                        Optional.ofNullable(sortRating),
+
+                        Optional.ofNullable(maxNHits).orElse(10)
                 )
         );
 

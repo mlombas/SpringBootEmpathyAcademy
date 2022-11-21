@@ -1,4 +1,6 @@
+co/empathy/academy/demo_search/configuration/converters/OrderConverter.class
 co/empathy/academy/demo_search/ports/executors/adapters/ElasticQueryExecutor.class
+co/empathy/academy/demo_search/ports/order/POrderBuilder.class
 co/empathy/academy/demo_search/ports/queries/adapters/ElasticQueryBuilder.class
 co/empathy/academy/demo_search/ports/filters/PFilterBuilder.class
 co/empathy/academy/demo_search/ports/requests/senders/SpringSearchController.class
@@ -23,14 +25,18 @@ co/empathy/academy/demo_search/ports/index/Indexable.class
 co/empathy/academy/demo_search/ports/queries/adapters/MatchAllState.class
 co/empathy/academy/demo_search/ports/requests/commands/search/DefaultSearchCommand.class
 co/empathy/academy/demo_search/model/Title.class
+co/empathy/academy/demo_search/ports/order/adapters/ElasticOrderBuilder$1.class
 co/empathy/academy/demo_search/ports/requests/commands/search/SearchFilters.class
 co/empathy/academy/demo_search/ports/queries/adapters/ElasticQueryBuilderState.class
 co/empathy/academy/demo_search/ports/requests/PRequestReactor.class
 co/empathy/academy/demo_search/ports/queries/adapters/ShouldState.class
 co/empathy/academy/demo_search/ports/requests/commands/search/InTitleSearchCommand.class
+co/empathy/academy/demo_search/ports/order/adapters/ElasticOrderBuilder.class
+co/empathy/academy/demo_search/configuration/ConvertersConfig.class
 co/empathy/academy/demo_search/model/Ratings.class
 co/empathy/academy/demo_search/ports/requests/commands/document/BulkIndexCommand.class
 co/empathy/academy/demo_search/ports/requests/commands/document/MultipleFileBulkIndexCommand$1$1.class
+co/empathy/academy/demo_search/ports/order/POrderBuilder$Order.class
 co/empathy/academy/demo_search/ports/index/IndexerSettings.class
 co/empathy/academy/demo_search/ports/index/PDocumentIndexer.class
 co/empathy/academy/demo_search/configuration/Files.class
