@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -27,6 +28,8 @@ public class Title implements Indexable {
     @Nullable Double averageRating;
     @Nullable Integer numVotes;
 
+    @Nullable List<Aka> akas;
+
     public Title() {
         tconst = null;
         titleType = null;
@@ -40,10 +43,16 @@ public class Title implements Indexable {
         runtimeMinutes = 0;
         averageRating = 0.;
         numVotes = 0;
+        akas = new ArrayList<>();
     }
 
     @Override
     public String id() {
         return tconst;
+    }
+
+    public Title withOneMoreAka(Aka aka) {
+        akas.add(aka);
+        return this;
     }
 }

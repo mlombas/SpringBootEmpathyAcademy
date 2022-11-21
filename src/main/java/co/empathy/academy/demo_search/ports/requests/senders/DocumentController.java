@@ -1,5 +1,6 @@
 package co.empathy.academy.demo_search.ports.requests.senders;
 
+import co.empathy.academy.demo_search.model.FullAka;
 import co.empathy.academy.demo_search.model.Title;
 import co.empathy.academy.demo_search.model.Ratings;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
@@ -43,7 +44,8 @@ public class DocumentController {
     @PostMapping("/")
     public ResponseEntity<Title> document(
             @RequestParam MultipartFile basics,
-            @RequestParam Optional<MultipartFile> ratings
+            @RequestParam Optional<MultipartFile> ratings,
+            @RequestParam Optional<MultipartFile> akas
     ) throws IOException {
         Path bpath = Paths.get(".", basics.getOriginalFilename());
         basics.transferTo(bpath);
@@ -71,6 +73,22 @@ public class DocumentController {
                     )
             );
         }
+
+        if(akas.isPresent()) {
+            var inside = akas.get();
+            Path apath = Paths.get(".", inside.getOriginalFilename());
+            inside.transferTo(apath);
+
+            command.addPipe(
+                    new DocumentZipperPipe<Title, FullAka>(
+                            (m, fa) -> m
+                                    .withOneMoreAka(fa.getBaseAka()),
+                            (m, fa) -> m.getTconst().equals(fa.getTitleId()),
+                            new TSVReader<>(new File(apath.toUri()), FullAka.class)
+                    )
+            );
+        }
+
         reactor.reactToDocument(command);
 
         return ResponseEntity.ok(null);
