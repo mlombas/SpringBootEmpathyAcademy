@@ -3,6 +3,7 @@ co/empathy/academy/demo_search/ports/queries/adapters/ElasticQueryBuilder.class
 co/empathy/academy/demo_search/ports/filters/PFilterBuilder.class
 co/empathy/academy/demo_search/ports/requests/senders/SpringSearchController.class
 co/empathy/academy/demo_search/ports/requests/senders/util/SearchResponse.class
+co/empathy/academy/demo_search/model/Aka.class
 co/empathy/academy/demo_search/ports/queries/adapters/BaseState.class
 co/empathy/academy/demo_search/util/TSVReader.class
 co/empathy/academy/demo_search/ports/requests/commands/DocumentCommand.class
@@ -17,6 +18,7 @@ co/empathy/academy/demo_search/ports/requests/commands/document/MultipleFileBulk
 co/empathy/academy/demo_search/ports/index/adapters/MultiThreadedElasticIndexer$1.class
 co/empathy/academy/demo_search/configuration/Config.class
 co/empathy/academy/demo_search/ports/requests/commands/document/pipelines/Pipe.class
+co/empathy/academy/demo_search/model/FullAka.class
 co/empathy/academy/demo_search/ports/queries/adapters/DefaultState.class
 co/empathy/academy/demo_search/ports/requests/commands/SearchCommand.class
 co/empathy/academy/demo_search/ports/index/Indexable.class

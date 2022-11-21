@@ -4,10 +4,7 @@ import org.elasticsearch.search.aggregations.metrics.InternalHDRPercentiles;
 
 import java.io.*;
 import java.lang.reflect.*;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -59,11 +56,14 @@ public class TSVReader<T> implements Iterable<T> {
             Object value = line.get(i);
 
             //Get the field
-            Field field = Arrays.stream(clazz.getDeclaredFields())
+            Optional<Field> op = Arrays.stream(clazz.getDeclaredFields())
                     .filter(f ->
                             f.getName().toLowerCase()
                                     .contains(name.toLowerCase())
-                    ).findFirst().get();
+                    ).findFirst();
+
+            if(op.isEmpty()) continue;
+            Field field = op.get();
 
             //Convert value to the type requested
             //TODO: fix this, make it more generic
