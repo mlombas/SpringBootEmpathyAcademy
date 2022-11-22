@@ -34,7 +34,7 @@ public class Title implements Indexable {
     @Nullable List<Writers> writers;
 
     @Nullable List<Starring> starring;
-
+    
     public Title() {
         tconst = null;
         titleType = null;
