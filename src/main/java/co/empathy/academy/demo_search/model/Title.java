@@ -30,6 +30,11 @@ public class Title implements Indexable {
 
     @Nullable List<Aka> akas;
 
+    @Nullable List<Directors> directors;
+    @Nullable List<Writers> writers;
+
+    @Nullable List<Starring> starring;
+    
     public Title() {
         tconst = null;
         titleType = null;
@@ -43,7 +48,13 @@ public class Title implements Indexable {
         runtimeMinutes = 0;
         averageRating = 0.;
         numVotes = 0;
+
         akas = new ArrayList<>();
+
+        directors = new ArrayList<>();
+        writers = new ArrayList<>();
+
+        starring = new ArrayList<>();
     }
 
     @Override
@@ -53,7 +64,20 @@ public class Title implements Indexable {
 
     public Title withOneMoreAka(Aka aka) {
         akas.add(aka);
-        akas.stream().forEach(System.out::println);
+        return this;
+    }
+
+    public Title withOneMoreDirector(Directors d) {
+        directors.add(d);
+        return this;
+    }
+    public Title withOneMoreWriter(Writers w) {
+        writers.add(w);
+        return this;
+    }
+
+    public Title withOneMoreStarring(Starring starring) {
+        this.starring.add(starring);
         return this;
     }
 }

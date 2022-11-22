@@ -1,5 +1,6 @@
 package co.empathy.academy.demo_search.ports.requests.senders;
 
+import co.empathy.academy.demo_search.model.*;
 import co.empathy.academy.demo_search.model.FullAka;
 import co.empathy.academy.demo_search.model.Title;
 import co.empathy.academy.demo_search.model.Ratings;
@@ -17,9 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Nullable;
-import javax.print.Doc;
-import javax.swing.text.html.Option;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -45,7 +43,9 @@ public class DocumentController {
     public ResponseEntity<Title> document(
             @RequestParam MultipartFile basics,
             @RequestParam Optional<MultipartFile> ratings,
-            @RequestParam Optional<MultipartFile> akas
+            @RequestParam Optional<MultipartFile> akas,
+            @RequestParam Optional<MultipartFile> crew,
+            @RequestParam Optional<MultipartFile> principals
     ) throws IOException {
         Path bpath = Paths.get(".", basics.getOriginalFilename());
         basics.transferTo(bpath);
@@ -81,17 +81,44 @@ public class DocumentController {
 
             command.addPipe(
                     new DocumentZipperPipe<Title, FullAka>(
-                            (m, fa) -> {
-                                var newm = m
-                                        .withOneMoreAka(fa.getBaseAka());
-                                System.out.println(newm);
-                                return newm;
-                            },
-                            (m, fa) -> {
-                                System.out.println(m.getTconst() + " " + fa.getTitleId());
-                                return m.getTconst().equals(fa.getTitleId());
-                            },
+                            (m, fa) -> m
+                                        .withOneMoreAka(fa.getBaseAka()),
+                            (m, fa) -> m.getTconst().equals(fa.getTitleId()),
                             new TSVReader<>(new File(apath.toUri()), FullAka.class)
+                    )
+            );
+        }
+        
+        if(crew.isPresent()) {
+            var inside = crew.get();
+            Path cpath = Paths.get(".", inside.getOriginalFilename());
+            inside.transferTo(cpath);
+
+            command.addPipe(
+                    new DocumentZipperPipe<Title, Crew>(
+                            (m, c) -> m
+                                    .withOneMoreDirector(c.getDirectors())
+                                    .withOneMoreWriter(c.getWriters()),
+                            (m, c) -> m.getTconst().equals(c.getTconst()),
+                            new TSVReader<>(new File(cpath.toUri()), Crew.class)
+                    )
+            );
+        }
+
+        if(principals.isPresent()) {
+            var inside = principals.get();
+            Path ppath = Paths.get(".", inside.getOriginalFilename());
+            inside.transferTo(ppath);
+
+            command.addPipe(
+                    new DocumentZipperPipe<Title, Principals>(
+                            (m, p) -> m
+                                    .withOneMoreStarring(p.getStarring()),
+                            (m, p) -> (
+                                    Integer.parseInt(m.getTconst().substring(2)) ==
+                                    Integer.parseInt(p.getTconst().substring(2))
+                                    ),
+                            new TSVReader<>(new File(ppath.toUri()), Principals.class)
                     )
             );
         }

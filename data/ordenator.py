@@ -3,7 +3,7 @@ import sys
 def parse_line(line):
     data = line.split('\t')
     num = int(data[0][2:])
-    data[0] = f"tt{num:0>9}"
+    data[0] = f"tt{num:0>10}"
     return data
 
 def order_file(fname):
