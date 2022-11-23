@@ -107,10 +107,10 @@ public class SpringSearchController {
                     var facets = new ArrayList<Facet>();
                     response.put("facets",
                             new Facet()
-                                    .withFacet("a")
+                                    .withFacet("genres")
                                     .withType("values")
                                     .withValues(
-                                            ((Aggregate) result.getAggregates().get("a"))
+                                            ((Aggregate) result.getAggregates().get("genres"))
                                                     .sterms().buckets().array().stream().map(b ->
                                                         new Facet.Value(
                                                                 b.key().toLowerCase(),

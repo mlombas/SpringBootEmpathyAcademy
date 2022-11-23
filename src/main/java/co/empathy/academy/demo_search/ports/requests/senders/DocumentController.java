@@ -1,9 +1,13 @@
 package co.empathy.academy.demo_search.ports.requests.senders;
 
 import co.empathy.academy.demo_search.model.titles.*;
+import co.empathy.academy.demo_search.ports.index.settings.PSettingsSetter;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
+import co.empathy.academy.demo_search.ports.requests.commands.SettingsCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.document.PipelineIndexCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.document.pipelines.DocumentZipperPipe;
+import co.empathy.academy.demo_search.ports.requests.commands.settings.JsonSettingReader;
+import co.empathy.academy.demo_search.ports.requests.commands.settings.SetJsonSettings;
 import co.empathy.academy.demo_search.util.TSVReader;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -46,6 +50,12 @@ public class DocumentController {
     ) throws IOException {
         Path bpath = Paths.get(".", basics.getOriginalFilename());
         basics.transferTo(bpath);
+
+        reactor.reactToSettings(new SetJsonSettings(
+                new JsonSettingReader(
+                        null, "mapping.json"
+                )
+        ));
 
         var command = new PipelineIndexCommand<Title>(
                 new TSVReader<>(

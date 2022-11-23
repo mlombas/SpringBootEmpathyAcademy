@@ -7,14 +7,10 @@
       "type": "keyword"
     },
     "primaryTitle": {
-      "type": "text",
-      "analyzer": "custom_analyzer",
-      "search_analyzer": "custom_analyzer"
+      "type": "text"
     },
     "originalTitle": {
-      "type": "text",
-      "analyzer": "custom_analyzer",
-      "search_analyzer": "custom_analyzer"
+      "type": "text"
     },
     "isAdult": {
       "type": "boolean"
@@ -41,9 +37,7 @@
       "type": "nested",
       "properties": {
         "title": {
-          "type": "text",
-          "analyzer": "custom_analyzer",
-          "search_analyzer": "custom_analyzer"
+          "type": "text"
         },
         "region": {
           "type": "keyword"

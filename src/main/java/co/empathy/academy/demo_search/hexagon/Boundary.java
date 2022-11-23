@@ -8,13 +8,11 @@ import co.empathy.academy.demo_search.ports.executors.PQueryExecutor;
 import co.empathy.academy.demo_search.ports.index.indexer.Indexable;
 import co.empathy.academy.demo_search.ports.index.indexer.IndexerSettings;
 import co.empathy.academy.demo_search.ports.index.indexer.PDocumentIndexer;
+import co.empathy.academy.demo_search.ports.index.settings.PSettingsSetter;
 import co.empathy.academy.demo_search.ports.order.POrderBuilder;
 import co.empathy.academy.demo_search.ports.queries.PQueryBuilder;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
-import co.empathy.academy.demo_search.ports.requests.commands.DocumentCommand;
-import co.empathy.academy.demo_search.ports.requests.commands.FacetCommand;
-import co.empathy.academy.demo_search.ports.requests.commands.SearchCommand;
-import co.empathy.academy.demo_search.ports.requests.commands.SearchFacetsCommand;
+import co.empathy.academy.demo_search.ports.requests.commands.*;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -32,6 +30,7 @@ public class Boundary implements PRequestReactor {
 
     private PQueryExecutor queryExecutor;
 
+    private PSettingsSetter setter;
     private PDocumentIndexer indexer;
 
     @Override
@@ -89,4 +88,10 @@ public class Boundary implements PRequestReactor {
         );
         indexer.bulkIndex(c.getDocuments());
     }
+
+    @Override
+    public void reactToSettings(SettingsCommand c) {
+        c.set(setter);
+    }
+
 }
