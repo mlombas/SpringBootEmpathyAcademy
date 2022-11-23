@@ -1,6 +1,4 @@
-package co.empathy.academy.demo_search.ports.index;
-
-import java.util.List;
+package co.empathy.academy.demo_search.ports.index.indexer;
 
 /**
  * Represents an adapter able to index documents

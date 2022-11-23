@@ -1,6 +1,6 @@
 package co.empathy.academy.demo_search.ports.requests;
 
-import co.empathy.academy.demo_search.ports.index.Indexable;
+import co.empathy.academy.demo_search.ports.index.indexer.Indexable;
 import co.empathy.academy.demo_search.ports.requests.commands.DocumentCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.SearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.SearchFacetsCommand;

@@ -1,15 +1,13 @@
 package co.empathy.academy.demo_search.hexagon;
 
 import co.elastic.clients.elasticsearch._types.SortOptions;
-import co.elastic.clients.elasticsearch._types.SortOrder;
-import co.elastic.clients.elasticsearch._types.aggregations.Aggregation;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.empathy.academy.demo_search.ports.filters.PFilterBuilder;
 import co.empathy.academy.demo_search.ports.executors.PQueryExecutor;
-import co.empathy.academy.demo_search.ports.index.Indexable;
-import co.empathy.academy.demo_search.ports.index.IndexerSettings;
-import co.empathy.academy.demo_search.ports.index.PDocumentIndexer;
+import co.empathy.academy.demo_search.ports.index.indexer.Indexable;
+import co.empathy.academy.demo_search.ports.index.indexer.IndexerSettings;
+import co.empathy.academy.demo_search.ports.index.indexer.PDocumentIndexer;
 import co.empathy.academy.demo_search.ports.order.POrderBuilder;
 import co.empathy.academy.demo_search.ports.queries.PQueryBuilder;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
@@ -20,7 +18,6 @@ import co.empathy.academy.demo_search.ports.requests.commands.SearchFacetsComman
 import lombok.AllArgsConstructor;
 
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -70,13 +67,10 @@ public class Boundary implements PRequestReactor {
                 .query(query)
                 .postFilter(filter)
                 .size(search.getMaxNHits())
-                .sort(order)
-                .aggregations("a", a -> a.histogram(h -> h.field("averageRating").interval(1.0)));
+                .sort(order);
 
-        /*
         for(FacetCommand f : c.getFacets())
             builder.aggregations(f.getName(), f.getFacet());
-*/
 
         SearchRequest sr = builder.build();
         System.out.println(sr);

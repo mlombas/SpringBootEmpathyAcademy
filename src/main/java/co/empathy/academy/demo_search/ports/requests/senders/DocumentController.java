@@ -1,9 +1,6 @@
 package co.empathy.academy.demo_search.ports.requests.senders;
 
-import co.empathy.academy.demo_search.model.*;
-import co.empathy.academy.demo_search.model.FullAka;
-import co.empathy.academy.demo_search.model.Title;
-import co.empathy.academy.demo_search.model.Ratings;
+import co.empathy.academy.demo_search.model.titles.*;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
 import co.empathy.academy.demo_search.ports.requests.commands.document.PipelineIndexCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.document.pipelines.DocumentZipperPipe;

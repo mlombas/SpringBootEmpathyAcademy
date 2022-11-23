@@ -1,12 +1,5 @@
 package co.empathy.academy.demo_search.ports.requests.commands.document.pipelines;
 
-import co.empathy.academy.demo_search.model.Ratings;
-import co.empathy.academy.demo_search.model.Title;
-import co.empathy.academy.demo_search.ports.requests.commands.DocumentCommand;
-import co.empathy.academy.demo_search.util.TSVReader;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
@@ -34,7 +27,16 @@ public class DocumentZipperPipe<T, TZ> implements Pipe<T> {
         if(!predicate.test(base, current)) return base;
 
         T result = zipper.apply(base, current);
-        if(iterator.hasNext()) current = iterator.next();
+        //Due to how this is constructed, this will:
+        // - Do nothing if iterator does not has next
+        // - Advance one and stop if iterator has next, but it is not compatible with base
+        // - Advance and merge with result otherwise
+        while(
+                iterator.hasNext() &&
+                predicate.test(base, current = iterator.next())
+        ) {
+            result = zipper.apply(result, current);
+        }
 
         return result;
     }

@@ -1,47 +1,29 @@
 package co.empathy.academy.demo_search.ports.requests.senders;
 
-import co.empathy.academy.demo_search.model.Title;
+import co.elastic.clients.elasticsearch._types.aggregations.Aggregate;
+import co.empathy.academy.demo_search.model.facets.Facet;
+import co.empathy.academy.demo_search.model.titles.Title;
 import co.empathy.academy.demo_search.ports.order.POrderBuilder;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
-<<<<<<< HEAD
-<<<<<<< Updated upstream
 import co.empathy.academy.demo_search.ports.requests.commands.search.GenreSearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.search.InTitleSearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.search.SearchFilters;
-import io.swagger.v3.oas.models.security.SecurityScheme;
-=======
-import co.empathy.academy.demo_search.ports.requests.commands.SearchFacetsCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.facets.ElasticTermsAggregation;
 import co.empathy.academy.demo_search.ports.requests.commands.search.AllSearchCommand;
-import co.empathy.academy.demo_search.ports.requests.commands.search.GenreSearchCommand;
-import co.empathy.academy.demo_search.ports.requests.commands.search.InTitleSearchCommand;
-import co.empathy.academy.demo_search.ports.requests.commands.search.SearchFilters;
 import co.empathy.academy.demo_search.ports.requests.commands.searchfacets.BasicSearchFacetsCommand;
-=======
-import co.empathy.academy.demo_search.ports.requests.commands.search.AllSearchCommand;
-import co.empathy.academy.demo_search.ports.requests.commands.search.GenreSearchCommand;
-import co.empathy.academy.demo_search.ports.requests.commands.search.InTitleSearchCommand;
-import co.empathy.academy.demo_search.ports.requests.commands.search.SearchFilters;
->>>>>>> main
-import co.empathy.academy.demo_search.ports.requests.senders.util.SearchResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> main
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Nullable;
-import javax.validation.constraints.Null;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/search")
@@ -50,11 +32,6 @@ public class SpringSearchController {
     @Autowired
     private PRequestReactor reactor;
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> main
     @Operation(summary = "Search for all movies satisfying a set of filters")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "List of movies found, it can be empty"),
@@ -95,13 +72,7 @@ public class SpringSearchController {
             @Nullable @RequestParam POrderBuilder.Order sortRating
     )
     {
-<<<<<<< HEAD
-
         var search = new AllSearchCommand(
-=======
-        CompletableFuture<List<Title>> titles = reactor.reactToSearch(
-                new AllSearchCommand(
->>>>>>> main
                         Optional.ofNullable(genre),
 
                         Optional.ofNullable(minYear),
@@ -118,7 +89,6 @@ public class SpringSearchController {
                         Optional.ofNullable(sortRating),
 
                         Optional.ofNullable(maxNHits).orElse(10)
-<<<<<<< HEAD
                 );
 
         var command = new BasicSearchFacetsCommand<>(
@@ -132,25 +102,31 @@ public class SpringSearchController {
                     var response = new HashMap();
                     response.put("hits", result.getHits());
 
-                    response.put("facets", result.getAggregates());
-=======
-                )
-        );
+                    System.out.println(result.getAggregates());
 
-        return titles
-                .thenApply(hits -> {
-                    var response = new HashMap();
-                    response.put("hits", hits);
->>>>>>> main
+                    var facets = new ArrayList<Facet>();
+                    response.put("facets",
+                            new Facet()
+                                    .withFacet("a")
+                                    .withType("values")
+                                    .withValues(
+                                            ((Aggregate) result.getAggregates().get("a"))
+                                                    .sterms().buckets().array().stream().map(b ->
+                                                        new Facet.Value(
+                                                                b.key().toLowerCase(),
+                                                                b.key().toLowerCase(),
+                                                                b.docCount(),
+                                                                b.key().toLowerCase()
+                                                        )
+                                                    ).collect(Collectors.toList())
+                                    )
+
+                    );
                     return response;
                 })
                 .thenApply(response -> ResponseEntity.ok(response));
     }
 
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> main
     @GetMapping("/genres/{and}")
     public CompletableFuture<ResponseEntity<List<Title>>>
     genres(@PathVariable boolean and, @RequestBody List<String> genres)

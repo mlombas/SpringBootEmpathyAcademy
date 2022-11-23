@@ -2,8 +2,9 @@ package co.empathy.academy.demo_search.ports.index;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.BulkRequest;
-import co.empathy.academy.demo_search.model.Title;
-import co.empathy.academy.demo_search.ports.index.adapters.MultiThreadedElasticIndexer;
+import co.empathy.academy.demo_search.model.titles.Title;
+import co.empathy.academy.demo_search.ports.index.indexer.adapters.MultiThreadedElasticIndexer;
+import co.empathy.academy.demo_search.ports.index.indexer.IndexerSettings;
 import co.empathy.academy.demo_search.util.IterableCounter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,7 +12,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutorService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;

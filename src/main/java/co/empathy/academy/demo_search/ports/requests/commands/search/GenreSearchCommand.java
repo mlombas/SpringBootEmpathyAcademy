@@ -1,7 +1,7 @@
 package co.empathy.academy.demo_search.ports.requests.commands.search;
 
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
-import co.empathy.academy.demo_search.model.Title;
+import co.empathy.academy.demo_search.model.titles.Title;
 import co.empathy.academy.demo_search.ports.queries.PQueryBuilder;
 
 import java.util.List;

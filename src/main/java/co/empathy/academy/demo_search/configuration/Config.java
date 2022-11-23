@@ -5,16 +5,13 @@ import co.empathy.academy.demo_search.ports.executors.PQueryExecutor;
 import co.empathy.academy.demo_search.ports.executors.adapters.ElasticQueryExecutor;
 import co.empathy.academy.demo_search.ports.filters.PFilterBuilder;
 import co.empathy.academy.demo_search.ports.filters.adapters.ElasticFilterBuilder;
-import co.empathy.academy.demo_search.ports.index.PDocumentIndexer;
-import co.empathy.academy.demo_search.ports.index.adapters.ElasticIndexer;
-import co.empathy.academy.demo_search.ports.index.adapters.MultiThreadedElasticIndexer;
+import co.empathy.academy.demo_search.ports.index.indexer.PDocumentIndexer;
+import co.empathy.academy.demo_search.ports.index.indexer.adapters.MultiThreadedElasticIndexer;
 import co.empathy.academy.demo_search.ports.order.POrderBuilder;
 import co.empathy.academy.demo_search.ports.order.adapters.ElasticOrderBuilder;
 import co.empathy.academy.demo_search.ports.queries.PQueryBuilder;
 import co.empathy.academy.demo_search.ports.queries.adapters.ElasticQueryBuilder;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
-import lombok.Builder;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 package co.empathy.academy.demo_search.ports.requests.commands.facets;
-=======
-package co.empathy.academy.demo_search.ports.requests.commands.aggregations;
->>>>>>> main
 
 import co.elastic.clients.elasticsearch._types.aggregations.Aggregation;
 import co.empathy.academy.demo_search.ports.requests.commands.FacetCommand;
@@ -12,7 +8,7 @@ public class ElasticTermsAggregation implements FacetCommand {
 
     public ElasticTermsAggregation(String field) {
         facet = new Aggregation.Builder()
-                .terms(t -> t.field(field))
+                .terms(t -> t.field(field).size(100))
                 .build();
     }
 
