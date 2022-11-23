@@ -11,7 +11,9 @@ import co.empathy.academy.demo_search.ports.index.PDocumentIndexer;
 import co.empathy.academy.demo_search.ports.queries.PQueryBuilder;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
 import co.empathy.academy.demo_search.ports.requests.commands.DocumentCommand;
+import co.empathy.academy.demo_search.ports.requests.commands.FacetCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.SearchCommand;
+import co.empathy.academy.demo_search.ports.requests.commands.SearchFacetsCommand;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -47,6 +49,35 @@ public class Boundary implements PRequestReactor {
         return c.getFuture();
     }
 
+    @Override
+    public <T> void reactToSearchFacet(SearchFacetsCommand<T> c) {
+        SearchCommand<?> search = c.getSearch();
+        Query query = search.buildQuery(queryBuilder);
+        Query filter =
+                search.buildFilter(filterBuilder);
+        List<SortOptions> order = search.buildOrder(orderBuilder);
+
+        SearchRequest.Builder builder = new SearchRequest.Builder()
+                .index("movies")
+                .query(query)
+                .postFilter(filter)
+                .size(search.getMaxNHits())
+                .sort(order)
+                .aggregations("a", a -> a.histogram(h -> h.field("averageRating").interval(1.0)));
+
+        /*
+        for(FacetCommand f : c.getFacets())
+            builder.aggregations(f.getName(), f.getFacet());
+*/
+
+        SearchRequest sr = builder.build();
+        System.out.println(sr);
+        c.accept(
+                queryExecutor.executeSearchFacetQuery(sr, search.getInnerClass())
+        );
+    }
+
+    @Override
     public <T extends Indexable> void reactToDocument(DocumentCommand<T> c) {
         indexer.setSettings(
                 new IndexerSettings(
