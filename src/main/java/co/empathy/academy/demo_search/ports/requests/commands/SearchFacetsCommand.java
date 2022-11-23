@@ -1,5 +1,6 @@
 package co.empathy.academy.demo_search.ports.requests.commands;
 
+<<<<<<< HEAD
 import co.elastic.clients.elasticsearch._types.aggregations.Aggregate;
 import co.empathy.academy.demo_search.model.Title;
 import lombok.Value;
@@ -21,4 +22,9 @@ public interface SearchFacetsCommand<T> {
     List<FacetCommand> getFacets();
     void accept(Result result);
     CompletableFuture<Result> getFuture();
+=======
+public interface SearchWithAggregationsCommand<T> {
+    SearchCommand<T> search;
+
+>>>>>>> main
 }

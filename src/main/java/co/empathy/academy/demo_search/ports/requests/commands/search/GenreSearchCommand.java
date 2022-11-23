@@ -1,18 +1,17 @@
 package co.empathy.academy.demo_search.ports.requests.commands.search;
 
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
-import co.empathy.academy.demo_search.model.Movie;
+import co.empathy.academy.demo_search.model.Title;
 import co.empathy.academy.demo_search.ports.queries.PQueryBuilder;
-import co.empathy.academy.demo_search.ports.requests.commands.SearchCommand;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class GenreSearchCommand extends DefaultSearchCommand<Movie> {
+public class GenreSearchCommand extends DefaultSearchCommand<Title> {
 
     private final List<String> genres;
     private final boolean and;
-    private CompletableFuture<List<Movie>> future;
+    private CompletableFuture<List<Title>> future;
 
     public GenreSearchCommand(List<String> genres) {
         this(genres, true);
@@ -33,17 +32,17 @@ public class GenreSearchCommand extends DefaultSearchCommand<Movie> {
     }
 
     @Override
-    public CompletableFuture<List<Movie>> getFuture() {
+    public CompletableFuture<List<Title>> getFuture() {
         return future;
     }
 
     @Override
-    public void accept(List<Movie> returns) {
+    public void accept(List<Title> returns) {
         future.complete(returns);
     }
 
     @Override
-    public Class<Movie> getInnerClass() {
-        return Movie.class;
+    public Class<Title> getInnerClass() {
+        return Title.class;
     }
 }

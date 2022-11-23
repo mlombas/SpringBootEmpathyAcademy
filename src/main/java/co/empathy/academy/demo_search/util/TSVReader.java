@@ -1,13 +1,11 @@
 package co.empathy.academy.demo_search.util;
 
+import co.empathy.academy.demo_search.model.FullAka;
 import org.elasticsearch.search.aggregations.metrics.InternalHDRPercentiles;
 
 import java.io.*;
 import java.lang.reflect.*;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -52,6 +50,9 @@ public class TSVReader<T> implements Iterable<T> {
     private T convertLine(List<String> line)
             throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException
     {
+        headers.forEach(System.out::println);
+        line.forEach(System.out::println);
+
         //Lotta reflection and such
         T result = clazz.getDeclaredConstructor().newInstance();
         for(int i = 0; i < line.size(); i++) {
@@ -59,21 +60,27 @@ public class TSVReader<T> implements Iterable<T> {
             Object value = line.get(i);
 
             //Get the field
-            Field field = Arrays.stream(clazz.getDeclaredFields())
+            Optional<Field> op = Arrays.stream(clazz.getDeclaredFields())
                     .filter(f ->
                             f.getName().toLowerCase()
-                                    .contains(name.toLowerCase())
-                    ).findFirst().get();
+                                    .equals(name.toLowerCase())
+                    ).findFirst();
+
+            if(op.isEmpty()) continue;
+            Field field = op.get();
 
             //Convert value to the type requested
             //TODO: fix this, make it more generic
             if(listNames.contains(name))
                 value = Arrays.stream(((String) value).split(",")).toList();
-            else
+            else try {
                 value = field
                         .getType()
                         .getDeclaredConstructor(String.class)
                         .newInstance(value);
+            } catch (InvocationTargetException e) {
+                value = null;
+            }
 
             //Set the field, it is final so we need to make it accesible
             field.setAccessible(true);
@@ -83,11 +90,7 @@ public class TSVReader<T> implements Iterable<T> {
             );
         }
 
-        if(result == null)
-        {
-            headers.forEach(System.out::println);
-            line.forEach(System.out::println);
-        }
+        System.out.println(result);
         return result;
     }
 
@@ -135,6 +138,7 @@ public class TSVReader<T> implements Iterable<T> {
                     InstantiationException |
                     IllegalAccessException e
             ) {
+                e.printStackTrace();
                 return null;
             }
         }

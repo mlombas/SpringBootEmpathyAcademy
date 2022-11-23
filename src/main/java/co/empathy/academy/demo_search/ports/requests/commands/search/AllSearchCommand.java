@@ -1,7 +1,10 @@
 package co.empathy.academy.demo_search.ports.requests.commands.search;
 
 import co.elastic.clients.elasticsearch._types.SortOptions;
+<<<<<<< HEAD
 import co.elastic.clients.elasticsearch._types.aggregations.Aggregation;
+=======
+>>>>>>> main
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.empathy.academy.demo_search.model.Title;
 import co.empathy.academy.demo_search.ports.filters.PFilterBuilder;

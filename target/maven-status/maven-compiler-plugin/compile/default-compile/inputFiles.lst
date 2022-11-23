@@ -1,5 +1,6 @@
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/index/adapters/ElasticIndexer.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/queries/adapters/MustState.java
+/Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/model/Aka.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/senders/DocumentController.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/index/IndexerSettings.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/DemoSearchApplication.java
@@ -7,21 +8,38 @@
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/queries/adapters/ElasticQueryBuilder.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/queries/adapters/ElasticStateException.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/configuration/Config.java
+<<<<<<< Updated upstream
+/Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/senders/util/SearchResponse.java
+/Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/model/Ratings.java
+=======
+<<<<<<< Updated upstream
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/model/Movie.java
+=======
+/Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/senders/util/SearchResponse.java
+/Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/model/Ratings.java
+/Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/configuration/CORS.java
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/queries/adapters/DefaultState.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/commands/search/GenreSearchCommand.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/executors/adapters/ElasticQueryExecutor.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/queries/adapters/BaseState.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/commands/SearchCommand.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/executors/PQueryExecutor.java
+/Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/commands/document/pipelines/DocumentZipperPipe.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/senders/SpringSearchController.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/filters/adapters/ElasticFilterBuilder.java
+/Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/commands/document/MultipleFileBulkIndexCommand.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/index/Indexable.java
+/Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/commands/document/PipelineIndexCommand.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/queries/adapters/MatchAllState.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/hexagon/Boundary.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/queries/adapters/ShouldState.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/index/adapters/MultiThreadedElasticIndexer.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/commands/search/InTitleSearchCommand.java
+/Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/commands/search/AllSearchCommand.java
+/Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/model/FullAka.java
+/Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/model/Title.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/index/PDocumentIndexer.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/configuration/Files.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/util/TSVReader.java
@@ -30,6 +48,7 @@
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/commands/document/BulkIndexCommand.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/commands/search/DefaultSearchCommand.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/configuration/ElasticConfig.java
+/Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/commands/document/pipelines/Pipe.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/commands/search/SearchFilters.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/filters/PFilterBuilder.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/queries/adapters/MultiMatchState.java

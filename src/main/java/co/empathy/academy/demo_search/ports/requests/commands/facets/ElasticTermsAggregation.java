@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package co.empathy.academy.demo_search.ports.requests.commands.facets;
+=======
+package co.empathy.academy.demo_search.ports.requests.commands.aggregations;
+>>>>>>> main
 
 import co.elastic.clients.elasticsearch._types.aggregations.Aggregation;
 import co.empathy.academy.demo_search.ports.requests.commands.FacetCommand;

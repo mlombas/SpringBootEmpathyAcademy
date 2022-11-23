@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package co.empathy.academy.demo_search.ports.requests.commands.searchfacets;
 
 import co.empathy.academy.demo_search.ports.requests.commands.FacetCommand;
@@ -40,4 +41,7 @@ public class BasicSearchFacetsCommand<T> implements SearchFacetsCommand<T> {
     public CompletableFuture<Result> getFuture() {
         return future;
     }
+=======
+package co.empathy.academy.demo_search.ports.requests.commands.searchfacets;public class BasicSearchFacetsCommand {
+>>>>>>> main
 }

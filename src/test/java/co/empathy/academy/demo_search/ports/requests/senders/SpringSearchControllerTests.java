@@ -1,9 +1,8 @@
 package co.empathy.academy.demo_search.ports.requests.senders;
 
 import co.empathy.academy.demo_search.hexagon.Boundary;
-import co.empathy.academy.demo_search.model.Movie;
+import co.empathy.academy.demo_search.model.Title;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
-import co.empathy.academy.demo_search.ports.requests.commands.search.SearchFilters;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -23,7 +22,7 @@ public class SpringSearchControllerTests {
     @Test
     void givenController_whenGenreSearch_thenListOfGenresReturned() throws ExecutionException, InterruptedException {
         List<String> search = List.of(new String[]{"a", "b"});
-        List<Object> response = List.of(new Object[]{new Movie()});
+        List<Object> response = List.of(new Object[]{new Title()});
         CompletableFuture<List<Object>> future = new CompletableFuture<>();
         future.complete(response);
 
@@ -44,7 +43,7 @@ public class SpringSearchControllerTests {
     @Test
     void givenController_whenGenreSearchWithOr_thenListOfGenresReturned() throws ExecutionException, InterruptedException {
         List<String> search = List.of(new String[]{"a", "b"});
-        List<Object> response = List.of(new Object[]{new Movie()});
+        List<Object> response = List.of(new Object[]{new Title()});
         CompletableFuture<List<Object>> future = new CompletableFuture<>();
         future.complete(response);
 
@@ -68,7 +67,7 @@ public class SpringSearchControllerTests {
     @Test
     void givenController_inTitleSearch_thenListOfGenresReturned() throws ExecutionException, InterruptedException {
         String search = "a";
-        List<Object> response = List.of(new Object[]{new Movie()});
+        List<Object> response = List.of(new Object[]{new Title()});
         CompletableFuture<List<Object>> future = new CompletableFuture<>();
         future.complete(response);
 

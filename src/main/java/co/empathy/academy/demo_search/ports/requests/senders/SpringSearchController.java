@@ -1,7 +1,9 @@
 package co.empathy.academy.demo_search.ports.requests.senders;
 
-import co.empathy.academy.demo_search.model.Movie;
+import co.empathy.academy.demo_search.model.Title;
+import co.empathy.academy.demo_search.ports.order.POrderBuilder;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 import co.empathy.academy.demo_search.ports.requests.commands.search.GenreSearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.search.InTitleSearchCommand;
@@ -15,19 +17,30 @@ import co.empathy.academy.demo_search.ports.requests.commands.search.GenreSearch
 import co.empathy.academy.demo_search.ports.requests.commands.search.InTitleSearchCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.search.SearchFilters;
 import co.empathy.academy.demo_search.ports.requests.commands.searchfacets.BasicSearchFacetsCommand;
+=======
+import co.empathy.academy.demo_search.ports.requests.commands.search.AllSearchCommand;
+import co.empathy.academy.demo_search.ports.requests.commands.search.GenreSearchCommand;
+import co.empathy.academy.demo_search.ports.requests.commands.search.InTitleSearchCommand;
+import co.empathy.academy.demo_search.ports.requests.commands.search.SearchFilters;
+>>>>>>> main
 import co.empathy.academy.demo_search.ports.requests.senders.util.SearchResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> main
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLSyntaxErrorException;
-import java.util.List;
+import javax.annotation.Nullable;
+import javax.validation.constraints.Null;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
@@ -37,8 +50,11 @@ public class SpringSearchController {
     @Autowired
     private PRequestReactor reactor;
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> main
     @Operation(summary = "Search for all movies satisfying a set of filters")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "List of movies found, it can be empty"),
@@ -79,8 +95,13 @@ public class SpringSearchController {
             @Nullable @RequestParam POrderBuilder.Order sortRating
     )
     {
+<<<<<<< HEAD
 
         var search = new AllSearchCommand(
+=======
+        CompletableFuture<List<Title>> titles = reactor.reactToSearch(
+                new AllSearchCommand(
+>>>>>>> main
                         Optional.ofNullable(genre),
 
                         Optional.ofNullable(minYear),
@@ -97,6 +118,7 @@ public class SpringSearchController {
                         Optional.ofNullable(sortRating),
 
                         Optional.ofNullable(maxNHits).orElse(10)
+<<<<<<< HEAD
                 );
 
         var command = new BasicSearchFacetsCommand<>(
@@ -111,17 +133,29 @@ public class SpringSearchController {
                     response.put("hits", result.getHits());
 
                     response.put("facets", result.getAggregates());
+=======
+                )
+        );
+
+        return titles
+                .thenApply(hits -> {
+                    var response = new HashMap();
+                    response.put("hits", hits);
+>>>>>>> main
                     return response;
                 })
                 .thenApply(response -> ResponseEntity.ok(response));
     }
 
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> main
     @GetMapping("/genres/{and}")
-    public CompletableFuture<ResponseEntity<List<Movie>>>
+    public CompletableFuture<ResponseEntity<List<Title>>>
     genres(@PathVariable boolean and, @RequestBody List<String> genres)
     {
-        CompletableFuture<List<Movie>> movies = reactor.reactToSearch(
+        CompletableFuture<List<Title>> movies = reactor.reactToSearch(
                 new GenreSearchCommand(genres, and)
         );
 
@@ -131,14 +165,14 @@ public class SpringSearchController {
                 );
     }
     @GetMapping("/genres")
-    public CompletableFuture<ResponseEntity<List<Movie>>>
+    public CompletableFuture<ResponseEntity<List<Title>>>
     genres(@RequestBody List<String> genres)
     {
         return genres(true, genres);
     }
 
     @GetMapping("/intitle")
-    public CompletableFuture<ResponseEntity<List<Movie>>>
+    public CompletableFuture<ResponseEntity<List<Title>>>
     intitle(
             @RequestBody String intitle,
             @RequestParam(required = false) String genre,
