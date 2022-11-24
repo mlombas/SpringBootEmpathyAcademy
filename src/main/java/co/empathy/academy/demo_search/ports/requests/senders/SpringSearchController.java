@@ -93,7 +93,7 @@ public class SpringSearchController {
 
         var command = new BasicSearchFacetsCommand<>(
                 search,
-                new ElasticTermsAggregation("genres")
+                new ElasticTermsAggregation("genres", "genres")
         );
         reactor.reactToSearchFacet(command);
 
@@ -102,29 +102,31 @@ public class SpringSearchController {
                     var response = new HashMap();
                     response.put("hits", result.getHits());
 
-                    System.out.println(result.getAggregates());
-
-                    var facets = new ArrayList<Facet>();
-                    response.put("facets",
+                    var facets = result.getAggregates().keySet().stream().map(k ->
                             new Facet()
-                                    .withFacet("genres")
+                                    .withFacet(k.toString())
                                     .withType("values")
                                     .withValues(
-                                            ((Aggregate) result.getAggregates().get("genres"))
-                                                    .sterms().buckets().array().stream().map(b ->
-                                                        new Facet.Value(
-                                                                b.key().toLowerCase(),
-                                                                b.key().toLowerCase(),
-                                                                b.docCount(),
-                                                                b.key().toLowerCase()
-                                                        )
-                                                    ).collect(Collectors.toList())
+                                        extractValuesFromAggregate((Aggregate) result.getAggregates().get(k))
                                     )
-
-                    );
+                            ).collect(Collectors.toList());
+                    response.put("facets", facets);
                     return response;
                 })
                 .thenApply(response -> ResponseEntity.ok(response));
+    }
+
+    private List<Facet.Value> extractValuesFromAggregate(Aggregate agg) {
+        return agg
+                .sterms().buckets().array().stream().map(b ->
+                        new Facet.Value(
+                                b.key().toLowerCase(),
+                                b.key().toLowerCase(),
+                                b.docCount(),
+                                b.key().toLowerCase()
+                        )
+                )
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/genres/{and}")
