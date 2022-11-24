@@ -50,6 +50,9 @@ public class SpringSearchController {
             @Parameter(name = "maxScore", required = false, description = "Maximum score to match"),
 
             @Parameter(name = "type", required = false, description = "Type of title to match"),
+
+            @Parameter(name = "maxNHits", required = false, description = "Max number of hits returned"),
+            @Parameter(name = "sortRating", required = false, description = "Sorting order of rating"),
     })
     @GetMapping("/")
     public CompletableFuture<ResponseEntity<Map<String, Object>>>
@@ -100,14 +103,14 @@ public class SpringSearchController {
         return command.getFuture()
                 .thenApply(result -> {
                     var response = new HashMap();
-                    response.put("hits", result.getHits());
+                    response.put("hits", result.hits());
 
-                    var facets = result.getAggregates().keySet().stream().map(k ->
+                    var facets = result.facets().keySet().stream().map(k ->
                             new Facet()
                                     .withFacet(k.toString())
                                     .withType("values")
                                     .withValues(
-                                        extractValuesFromAggregate((Aggregate) result.getAggregates().get(k))
+                                        extractValuesFromAggregate((Aggregate) result.facets().get(k))
                                     )
                             ).collect(Collectors.toList());
                     response.put("facets", facets);

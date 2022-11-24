@@ -7,13 +7,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Represents the command to search for anything, while returning facets
+ * @param <T> the thing to search
+ */
 public interface SearchFacetsCommand<T> {
+    /**
+     * Result of a search facet command, which includes query results as well as
+     * facets
+     * @param hits the hits
+     * @param facets the facets
+     * @param <T> The type of the hits
+     */
     @Value
-    public static class Result<T> {
-        List<T> hits;
-        Map<String, Aggregate> aggregates;
-    }
+    record Result<T>(List<T> hits, Map<String, Aggregate> facets) {}
 
+    /**
+     * Gets the search command
+     * @return
+     */
     SearchCommand<T> getSearch();
     List<FacetCommand> getFacets();
     void accept(Result result);
