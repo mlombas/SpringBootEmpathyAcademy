@@ -5,8 +5,10 @@ import co.empathy.academy.demo_search.ports.requests.commands.FacetCommand;
 
 public class ElasticTermsAggregation implements FacetCommand {
     private Aggregation facet;
+    private String name;
 
-    public ElasticTermsAggregation(String field) {
+    public ElasticTermsAggregation(String name, String field) {
+        this.name = name;
         facet = new Aggregation.Builder()
                 .terms(t -> t.field(field).size(100))
                 .build();
@@ -19,6 +21,6 @@ public class ElasticTermsAggregation implements FacetCommand {
 
     @Override
     public String getName() {
-        return "facet";
+        return name;
     }
 }
