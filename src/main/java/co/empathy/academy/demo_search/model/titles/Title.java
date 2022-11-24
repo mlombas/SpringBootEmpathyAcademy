@@ -1,6 +1,6 @@
-package co.empathy.academy.demo_search.model;
+package co.empathy.academy.demo_search.model.titles;
 
-import co.empathy.academy.demo_search.ports.index.Indexable;
+import co.empathy.academy.demo_search.ports.index.indexer.Indexable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 

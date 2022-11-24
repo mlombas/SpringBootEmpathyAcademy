@@ -2,8 +2,9 @@ package co.empathy.academy.demo_search.ports.index;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.BulkRequest;
-import co.empathy.academy.demo_search.model.Title;
-import co.empathy.academy.demo_search.ports.index.adapters.ElasticIndexer;
+import co.empathy.academy.demo_search.model.titles.Title;
+import co.empathy.academy.demo_search.ports.index.indexer.adapters.ElasticIndexer;
+import co.empathy.academy.demo_search.ports.index.indexer.IndexerSettings;
 import co.empathy.academy.demo_search.util.IterableCounter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

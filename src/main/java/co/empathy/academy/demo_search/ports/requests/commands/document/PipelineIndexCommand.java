@@ -1,6 +1,5 @@
 package co.empathy.academy.demo_search.ports.requests.commands.document;
 
-import co.empathy.academy.demo_search.model.Ratings;
 import co.empathy.academy.demo_search.ports.requests.commands.DocumentCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.document.pipelines.Pipe;
 

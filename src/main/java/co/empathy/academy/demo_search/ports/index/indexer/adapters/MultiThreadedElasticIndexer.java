@@ -1,21 +1,18 @@
-package co.empathy.academy.demo_search.ports.index.adapters;
+package co.empathy.academy.demo_search.ports.index.indexer.adapters;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.BulkRequest;
-import co.empathy.academy.demo_search.ports.index.Indexable;
-import co.empathy.academy.demo_search.ports.index.IndexerSettings;
-import co.empathy.academy.demo_search.ports.index.PDocumentIndexer;
+import co.empathy.academy.demo_search.ports.index.indexer.Indexable;
+import co.empathy.academy.demo_search.ports.index.indexer.IndexerSettings;
+import co.empathy.academy.demo_search.ports.index.indexer.PDocumentIndexer;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 

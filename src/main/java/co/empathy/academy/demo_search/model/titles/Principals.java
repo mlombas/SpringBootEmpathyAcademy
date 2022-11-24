@@ -1,4 +1,4 @@
-package co.empathy.academy.demo_search.model;
+package co.empathy.academy.demo_search.model.titles;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

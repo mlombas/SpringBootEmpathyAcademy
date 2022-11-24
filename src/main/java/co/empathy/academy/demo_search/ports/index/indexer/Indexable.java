@@ -1,4 +1,4 @@
-package co.empathy.academy.demo_search.ports.index;
+package co.empathy.academy.demo_search.ports.index.indexer;
 
 /**
  * Represents the attributes any document

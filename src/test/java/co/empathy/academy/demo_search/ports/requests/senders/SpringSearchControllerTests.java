@@ -1,7 +1,7 @@
 package co.empathy.academy.demo_search.ports.requests.senders;
 
 import co.empathy.academy.demo_search.hexagon.Boundary;
-import co.empathy.academy.demo_search.model.Title;
+import co.empathy.academy.demo_search.model.titles.Title;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

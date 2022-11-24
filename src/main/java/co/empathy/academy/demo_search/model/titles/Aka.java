@@ -1,4 +1,4 @@
-package co.empathy.academy.demo_search.model;
+package co.empathy.academy.demo_search.model.titles;
 
 import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
 import lombok.AllArgsConstructor;
