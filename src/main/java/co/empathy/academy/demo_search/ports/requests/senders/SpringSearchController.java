@@ -51,7 +51,7 @@ public class SpringSearchController {
 
             @Parameter(name = "type", required = false, description = "Type of title to match"),
     })
-    @GetMapping("/")
+    @GetMapping(value = {"/", ""})
     public CompletableFuture<ResponseEntity<Map<String, Object>>>
     search(
             @Nullable @RequestParam List<String> genre,

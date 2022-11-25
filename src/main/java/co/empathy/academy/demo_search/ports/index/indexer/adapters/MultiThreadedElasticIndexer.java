@@ -2,6 +2,7 @@ package co.empathy.academy.demo_search.ports.index.indexer.adapters;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.BulkRequest;
+import co.empathy.academy.demo_search.model.titles.Title;
 import co.empathy.academy.demo_search.ports.index.indexer.Indexable;
 import co.empathy.academy.demo_search.ports.index.indexer.IndexerSettings;
 import co.empathy.academy.demo_search.ports.index.indexer.PDocumentIndexer;
@@ -51,7 +52,9 @@ public class MultiThreadedElasticIndexer implements PDocumentIndexer {
         Iterator<T> iterator = documents.iterator();
         List<T> bulk = new LinkedList<>();
         while(iterator.hasNext()) {
-            bulk.add(iterator.next());
+            T curr;
+            bulk.add(curr = iterator.next());
+            //System.out.println(((Title) curr).getTitleType());
             if(bulk.size() >= settings.getNDocumentsPerBulk()) {
                 parallelIndex(bulk);
                 bulk = new LinkedList<>();

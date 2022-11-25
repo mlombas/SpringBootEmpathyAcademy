@@ -19,7 +19,15 @@ public class ElasticSettingsSetter implements PSettingsSetter {
     @Override
     public void setSettings(InputStream settings) {
         try {
+            if(esClient.indices().exists(e -> e.index(indexName)).value())
+                esClient.indices().delete(c -> c.index(indexName));
+
+            esClient.indices().create(o -> o.index(indexName));
+            esClient.indices().close(c -> c.index(indexName));
+
             esClient.indices().putSettings(p -> p.index(indexName).withJson(settings));
+
+            esClient.indices().open(o -> o.index(indexName));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
