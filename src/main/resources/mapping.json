@@ -4,7 +4,7 @@
       "type": "keyword"
     },
     "titleType": {
-      "type": "keyword"
+      "type": "text"
     },
     "primaryTitle": {
       "type": "text"
@@ -40,10 +40,10 @@
           "type": "text"
         },
         "region": {
-          "type": "keyword"
+          "type": "text"
         },
         "language": {
-          "type": "keyword"
+          "type": "text"
         },
         "isOriginalTitle": {
           "type": "boolean"
