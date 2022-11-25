@@ -54,7 +54,7 @@ public class MultiThreadedElasticIndexer implements PDocumentIndexer {
         while(iterator.hasNext()) {
             T curr;
             bulk.add(curr = iterator.next());
-            System.out.println(((Title) curr).getTitleType());
+            //System.out.println(((Title) curr).getTitleType());
             if(bulk.size() >= settings.getNDocumentsPerBulk()) {
                 parallelIndex(bulk);
                 bulk = new LinkedList<>();

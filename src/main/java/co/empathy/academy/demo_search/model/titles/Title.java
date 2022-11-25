@@ -21,12 +21,13 @@ public class Title implements Indexable {
     private String primaryTitle;
     private String originalTitle;
     private Boolean isAdult;
-    private String startYear;
-    @Nullable private String endYear;
+    private Integer startYear;
+    @Nullable private Integer endYear;
     @Nullable private Integer runtimeMinutes;
     private List<String> genres;
     @Nullable Double averageRating;
     @Nullable Integer numVotes;
+
 
     @Nullable List<Aka> akas;
 
