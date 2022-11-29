@@ -72,9 +72,9 @@ public class DocumentController {
 
             command.addPipe(
                     new DocumentZipperPipe<Title, Ratings>(
-                            (m, r) -> m,
-                                    //.withAverageRating(r.getAverageRating())
-                                    //.withNumVotes(r.getNumVotes()),
+                            (m, r) -> m
+                                    .withAverageRating(r.getAverageRating())
+                                    .withNumVotes(r.getNumVotes()),
                             (m, r) -> m.getTconst().equals(r.getTconst()),
                             new TSVReader<>(new File(rpath.toUri()), Ratings.class)
                     )
