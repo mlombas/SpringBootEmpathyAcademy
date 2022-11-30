@@ -25,6 +25,7 @@ public class ElasticQueryExecutor implements PQueryExecutor {
                     clazz
             );
         } catch (IOException e) {
+            System.out.println("Problem while getting response from elastic: " + e.getStackTrace());
             response = null;
         }
 
