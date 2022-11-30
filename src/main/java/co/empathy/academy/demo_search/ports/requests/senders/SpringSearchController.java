@@ -54,7 +54,7 @@ public class SpringSearchController {
             @Parameter(name = "maxNHits", required = false, description = "Max number of hits returned"),
             @Parameter(name = "sortRating", required = false, description = "Sorting order of rating"),
     })
-    @GetMapping("/")
+    @GetMapping(value = {"/", ""})
     public CompletableFuture<ResponseEntity<Map<String, Object>>>
     search(
             @Nullable @RequestParam List<String> genre,

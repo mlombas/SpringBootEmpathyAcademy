@@ -1,19 +1,7 @@
 {
   "properties": {
-    "tconst": {
-      "type": "keyword"
-    },
     "titleType": {
       "type": "text"
-    },
-    "primaryTitle": {
-      "type": "text"
-    },
-    "originalTitle": {
-      "type": "text"
-    },
-    "isAdult": {
-      "type": "boolean"
     },
     "startYear": {
       "type": "integer"
@@ -32,31 +20,6 @@
     },
     "numVotes": {
       "type": "integer"
-    },
-    "akas": {
-      "type": "nested",
-      "properties": {
-        "title": {
-          "type": "text"
-        },
-        "region": {
-          "type": "keyword"
-        },
-        "language": {
-          "type": "keyword"
-        },
-        "isOriginalTitle": {
-          "type": "boolean"
-        }
-      }
-    },
-    "directors": {
-      "type": "nested",
-      "properties": {
-        "nconst": {
-          "type": "keyword"
-        }
-      }
     }
   }
 }

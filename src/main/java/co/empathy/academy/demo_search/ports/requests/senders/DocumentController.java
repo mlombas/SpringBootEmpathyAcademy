@@ -53,7 +53,7 @@ public class DocumentController {
 
         reactor.reactToSettings(new SetJsonSettings(
                 new JsonSettingReader(
-                        null, "mapping.json"
+                        "custom_analyzer.json", "mapping.json"
                 )
         ));
 
