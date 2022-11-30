@@ -17,6 +17,7 @@ import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +51,10 @@ public class SpringSearchController {
             @Parameter(name = "maxScore", required = false, description = "Maximum score to match"),
 
             @Parameter(name = "type", required = false, description = "Type of title to match"),
+
+            @Parameter(name = "maxNHits", required = false, description = "The max number of hits the request will return"),
+
+            @Parameter(name = "sortRating", required = false, description = "Asc or desc. The order in which hits will be sorted")
     })
     @GetMapping(value = {"/", ""})
     public CompletableFuture<ResponseEntity<Map<String, Object>>>
@@ -100,14 +105,14 @@ public class SpringSearchController {
         return command.getFuture()
                 .thenApply(result -> {
                     var response = new HashMap();
-                    response.put("hits", result.getHits());
+                    response.put("hits", result.hits());
 
-                    var facets = result.getAggregates().keySet().stream().map(k ->
+                    var facets = result.facets().keySet().stream().map(k ->
                             new Facet()
                                     .withFacet(k.toString())
                                     .withType("values")
                                     .withValues(
-                                        extractValuesFromAggregate((Aggregate) result.getAggregates().get(k))
+                                        extractValuesFromAggregate((Aggregate) result.facets().get(k))
                                     )
                             ).collect(Collectors.toList());
                     response.put("facets", facets);

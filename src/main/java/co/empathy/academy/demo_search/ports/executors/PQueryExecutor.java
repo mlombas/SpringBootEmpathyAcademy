@@ -12,12 +12,20 @@ import java.util.List;
 public interface PQueryExecutor {
     /**
      * Executes the query passed in
-     * @param q the query
+     * @param sr The search request
      * @param clazz the return class
      * @return a list of results the query has returned
      * @param <T> the type of the result
      */
     <T> List<T> executeQuery(SearchRequest sr, Class<T> clazz);
 
+    /**
+     * Executes a query passed in, with its bundled facets
+     *
+     * @param sr The search request, with facets
+     * @param clazz the return class
+     * @return a list of results, hits and facets
+     * @param <T> the type of the result
+     */
     <T> SearchFacetsCommand.Result<T> executeSearchFacetQuery(SearchRequest sr, Class<T> clazz);
 }
