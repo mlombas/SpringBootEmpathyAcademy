@@ -10,8 +10,11 @@ The Spring controllers send requests, these (for the moment) search requests get
 Inside the hexagon, the query, filter and ordering builders build each its own thing, and the hexagon bundles
 it all up before passing it down to the query executor, which executes the query.
 
-The controllers also can send document requests, to index a file. These are barebones for the moment and just pass the 
+The controllers also can send document commands, to index a file. These are barebones for the moment and just pass the 
 data down to the document indexer.
+
+Finally, settings commands change the settings of a certain index. These are normally sent before document requests,
+but are not mandatory and can exist on their own, which is why they get their own command category.
 
 ![The hexagon architecture](docs/hexagonal.png)
 
