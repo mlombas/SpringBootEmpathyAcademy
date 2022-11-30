@@ -9,6 +9,14 @@ public interface POrderBuilder {
         ASC, DESC
     }
 
+    /**
+     * Builds the order by field
+     * @param field the field to sort by
+     * @param order ascendant or descendant
+     * @see POrderBuilder.Order
+     *
+     * @return POrderBuilder for fluid interface
+     */
     POrderBuilder byField(String field, Order order);
 
     /**

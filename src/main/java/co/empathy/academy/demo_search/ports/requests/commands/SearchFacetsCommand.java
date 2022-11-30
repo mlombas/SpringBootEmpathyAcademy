@@ -27,7 +27,14 @@ public interface SearchFacetsCommand<T> {
      * @return
      */
     SearchCommand<T> getSearch();
+
+    /**
+     * Gets the facets bundled with the search command
+     * @return the facet commands
+     */
     List<FacetCommand> getFacets();
+
+
     void accept(Result result);
     CompletableFuture<Result> getFuture();
 }
