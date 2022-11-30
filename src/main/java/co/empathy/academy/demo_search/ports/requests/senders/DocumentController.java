@@ -39,6 +39,9 @@ public class DocumentController {
     @Parameters(value = {
             @Parameter(name = "basics", required = true, description = "Basics document"),
             @Parameter(name = "ratings", required = false, description = "Ratings document, will be zipped with basics"),
+            @Parameter(name = "akas", required = false, description = "Akas document, will be zipped with basics"),
+            @Parameter(name = "crew", required = false, description = "Crew document, will be zipped with basics"),
+            @Parameter(name = "principals", required = false, description = "Principals document, will be zipped with basics"),
     })
     @PostMapping("/")
     public ResponseEntity<Title> document(
