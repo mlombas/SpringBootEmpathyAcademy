@@ -17,6 +17,7 @@ import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,8 +52,9 @@ public class SpringSearchController {
 
             @Parameter(name = "type", required = false, description = "Type of title to match"),
 
-            @Parameter(name = "maxNHits", required = false, description = "Max number of hits returned"),
-            @Parameter(name = "sortRating", required = false, description = "Sorting order of rating"),
+            @Parameter(name = "maxNHits", required = false, description = "The max number of hits the request will return"),
+
+            @Parameter(name = "sortRating", required = false, description = "Asc or desc. The order in which hits will be sorted")
     })
     @GetMapping(value = {"/", ""})
     public CompletableFuture<ResponseEntity<Map<String, Object>>>

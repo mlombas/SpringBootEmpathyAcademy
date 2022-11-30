@@ -72,7 +72,6 @@ public class Boundary implements PRequestReactor {
             builder.aggregations(f.getName(), f.getFacet());
 
         SearchRequest sr = builder.build();
-        System.out.println(sr);
         c.accept(
                 queryExecutor.executeSearchFacetQuery(sr, search.getInnerClass())
         );
