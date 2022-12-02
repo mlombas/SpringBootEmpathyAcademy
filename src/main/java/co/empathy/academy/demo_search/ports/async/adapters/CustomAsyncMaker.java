@@ -19,9 +19,7 @@ public class CustomAsyncMaker implements PAsyncMaker {
         private Runner(Supplier<Object> func) {
             this.func = func;
 
-            synchronized (this.status) {
-                this.status = Status.UNSTARTED;
-            }
+            this.status = Status.UNSTARTED;
         }
 
         @Override
