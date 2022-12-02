@@ -24,6 +24,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
+import java.util.UUID;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+
 
 @RestController
 @RequestMapping("/index")
@@ -130,9 +134,15 @@ public class DocumentController {
             );
         }
 
-        reactor.reactToDocument(command);
+        //reactor.reactToDocument(command);
 
-        return ResponseEntity.ok(null);
+        return ResponseEntity.created(
+            linkTo(DocumentController.class)
+                    .toUriComponentsBuilder()
+                    .path("/status/{id}")
+                    .build(UUID.randomUUID())
+        )
+                .build();
     }
 
 }

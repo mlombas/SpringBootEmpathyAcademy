@@ -86,6 +86,7 @@ public class Boundary implements PRequestReactor {
                         "movies"
                 )
         );
+
         indexer.bulkIndex(c.getDocuments());
     }
 
