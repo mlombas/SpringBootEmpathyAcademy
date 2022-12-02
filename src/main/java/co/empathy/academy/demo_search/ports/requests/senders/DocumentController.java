@@ -1,6 +1,7 @@
 package co.empathy.academy.demo_search.ports.requests.senders;
 
 import co.empathy.academy.demo_search.model.titles.*;
+import co.empathy.academy.demo_search.ports.async.PAsyncMaker;
 import co.empathy.academy.demo_search.ports.index.settings.PSettingsSetter;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
 import co.empathy.academy.demo_search.ports.requests.commands.SettingsCommand;
@@ -23,7 +24,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.UUID;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+
 
 @RestController
 @RequestMapping("/index")
@@ -133,9 +139,24 @@ public class DocumentController {
             );
         }
 
-        reactor.reactToDocument(command);
+        UUID id = reactor.reactToDocument(command);
 
-        return ResponseEntity.ok(null);
+        return ResponseEntity.created(
+            linkTo(DocumentController.class)
+                    .toUriComponentsBuilder()
+                    .path("/status/{id}")
+                    .build(id)
+        )
+                .build();
+    }
+
+    @GetMapping("/status/{id}")
+    public ResponseEntity<PAsyncMaker.Status> status(@PathVariable UUID id) {
+        try {
+            return ResponseEntity.ok(reactor.reactToStatus(id));
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

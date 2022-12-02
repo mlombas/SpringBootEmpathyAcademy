@@ -1,6 +1,8 @@
 package co.empathy.academy.demo_search.configuration;
 
 import co.empathy.academy.demo_search.hexagon.Boundary;
+import co.empathy.academy.demo_search.ports.async.PAsyncMaker;
+import co.empathy.academy.demo_search.ports.async.adapters.CustomAsyncMaker;
 import co.empathy.academy.demo_search.ports.executors.PQueryExecutor;
 import co.empathy.academy.demo_search.ports.executors.adapters.ElasticQueryExecutor;
 import co.empathy.academy.demo_search.ports.filters.PFilterBuilder;
@@ -44,10 +46,14 @@ public class Config {
     @Bean
     public PDocumentIndexer documentIndexer() { return new MultiThreadedElasticIndexer(16);}
     @Bean
+    public PAsyncMaker asyncMaker() { return new CustomAsyncMaker();}
+
+    @Bean
     public PRequestReactor requestReactor(
             PQueryBuilder qbuilder, PFilterBuilder fbuilder, POrderBuilder obuilder,
-            PQueryExecutor executor, PSettingsSetter setter, PDocumentIndexer indexer
+            PQueryExecutor executor, PSettingsSetter setter, PDocumentIndexer indexer,
+            PAsyncMaker async
     ) {
-        return new Boundary(qbuilder, fbuilder, obuilder, executor, setter, indexer);
+        return new Boundary(qbuilder, fbuilder, obuilder, executor, setter, indexer, async);
     }
 }

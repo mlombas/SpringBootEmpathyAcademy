@@ -3,6 +3,7 @@ package co.empathy.academy.demo_search.hexagon;
 import co.elastic.clients.elasticsearch._types.SortOptions;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
+import co.empathy.academy.demo_search.ports.async.PAsyncMaker;
 import co.empathy.academy.demo_search.ports.filters.PFilterBuilder;
 import co.empathy.academy.demo_search.ports.executors.PQueryExecutor;
 import co.empathy.academy.demo_search.ports.index.indexer.Indexable;
@@ -16,6 +17,8 @@ import co.empathy.academy.demo_search.ports.requests.commands.*;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -32,6 +35,8 @@ public class Boundary implements PRequestReactor {
 
     private PSettingsSetter setter;
     private PDocumentIndexer indexer;
+
+    private PAsyncMaker async;
 
     @Override
     public <T> CompletableFuture<List<T>> reactToSearch(SearchCommand<T> c) {
@@ -78,19 +83,25 @@ public class Boundary implements PRequestReactor {
     }
 
     @Override
-    public <T extends Indexable> void reactToDocument(DocumentCommand<T> c) {
+    public <T extends Indexable> UUID reactToDocument(DocumentCommand<T> c) {
         indexer.setSettings(
                 new IndexerSettings(
                         20000,
                         "movies"
                 )
         );
-        indexer.bulkIndex(c.getDocuments());
+
+        return async.addJob(() -> indexer.bulkIndex(c.getDocuments()));
     }
 
     @Override
     public void reactToSettings(SettingsCommand c) {
         c.set(setter);
+    }
+
+    @Override
+    public PAsyncMaker.Status reactToStatus(UUID id) throws NoSuchElementException {
+        return async.checkStatus(id);
     }
 
 }

@@ -54,7 +54,6 @@ public class MultiThreadedElasticIndexer implements PDocumentIndexer {
         while(iterator.hasNext()) {
             T curr;
             bulk.add(curr = iterator.next());
-            //System.out.println(((Title) curr).getTitleType());
             if(bulk.size() >= settings.getNDocumentsPerBulk()) {
                 parallelIndex(bulk);
                 bulk = new LinkedList<>();
@@ -65,9 +64,7 @@ public class MultiThreadedElasticIndexer implements PDocumentIndexer {
     }
 
     private <T extends Indexable> void parallelIndex(List<T> bulk) {
-        pool.execute(new Runnable() {
-            @Override
-            public void run() {
+        pool.execute(() -> {
                 BulkRequest.Builder builder = new BulkRequest.Builder();
                 for(var doc : bulk) builder = addToBuilder(builder, doc);
 
@@ -81,8 +78,7 @@ public class MultiThreadedElasticIndexer implements PDocumentIndexer {
                 lock.unlock();
 
                 System.out.println("Indexed " + count + " documents");
-            }
-        });
+            });
     }
 
     private void flushBuilder(BulkRequest.Builder builder) throws IOException {

@@ -60,12 +60,16 @@ co/empathy/academy/demo_search/model/titles/Crew.class
 co/empathy/academy/demo_search/ports/order/POrderBuilder$Order.class
 co/empathy/academy/demo_search/configuration/Files.class
 co/empathy/academy/demo_search/ports/requests/commands/document/PipelineIndexCommand$1$1.class
+co/empathy/academy/demo_search/ports/async/adapters/CustomAsyncMaker.class
+co/empathy/academy/demo_search/ports/async/PAsyncMaker$Status.class
 co/empathy/academy/demo_search/ports/queries/PQueryBuilder.class
 co/empathy/academy/demo_search/ports/index/indexer/PDocumentIndexer.class
 co/empathy/academy/demo_search/ports/filters/adapters/ElasticFilterBuilder.class
 co/empathy/academy/demo_search/ports/queries/adapters/ElasticStateException.class
 co/empathy/academy/demo_search/ports/queries/adapters/MultiMatchState.class
+co/empathy/academy/demo_search/ports/async/PAsyncMaker.class
 co/empathy/academy/demo_search/ports/requests/commands/document/pipelines/DocumentZipperPipe.class
+co/empathy/academy/demo_search/ports/async/adapters/CustomAsyncMaker$Runner.class
 co/empathy/academy/demo_search/DemoSearchApplication.class
 co/empathy/academy/demo_search/configuration/ElasticConfig.class
 co/empathy/academy/demo_search/ports/requests/commands/search/GenreSearchCommand.class

@@ -1,5 +1,6 @@
 package co.empathy.academy.demo_search.ports.requests;
 
+import co.empathy.academy.demo_search.ports.async.PAsyncMaker;
 import co.empathy.academy.demo_search.ports.index.indexer.Indexable;
 import co.empathy.academy.demo_search.ports.requests.commands.DocumentCommand;
 import co.empathy.academy.demo_search.ports.requests.commands.SearchCommand;
@@ -7,6 +8,7 @@ import co.empathy.academy.demo_search.ports.requests.commands.SearchFacetsComman
 import co.empathy.academy.demo_search.ports.requests.commands.SettingsCommand;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -30,10 +32,18 @@ public interface PRequestReactor {
      * Sends the command to react to
      * @param c the command to send out at the boundary
      */
-    public <T extends Indexable> void reactToDocument(DocumentCommand<T> c);
+    public <T extends Indexable> UUID reactToDocument(DocumentCommand<T> c);
 
     /**
      * Sends the command to react to
      */
     public void reactToSettings(SettingsCommand c);
+
+    /**
+     * Returns the status of the id
+     * @param id UUID the id to check
+     * @return the status
+     */
+
+    PAsyncMaker.Status reactToStatus(UUID id);
 }
