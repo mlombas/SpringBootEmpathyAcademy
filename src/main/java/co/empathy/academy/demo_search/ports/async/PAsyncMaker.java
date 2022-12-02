@@ -1,6 +1,7 @@
 package co.empathy.academy.demo_search.ports.async;
 
 
+import java.util.NoSuchElementException;
 import java.util.UUID;
 import java.util.function.Supplier;
 
@@ -17,7 +18,7 @@ public interface PAsyncMaker {
     }
     UUID addJob(Supplier<Object> sup);
 
-    Status checkStatus(UUID uuid);
+    Status checkStatus(UUID uuid) throws NoSuchElementException;
 
     Object getResult(UUID uuid);
 }

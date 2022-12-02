@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 import java.util.function.Supplier;
 
@@ -66,7 +67,10 @@ public class CustomAsyncMaker implements PAsyncMaker {
     }
 
     @Override
-    public Status checkStatus(UUID uuid) {
+    public Status checkStatus(UUID uuid) throws NoSuchElementException {
+        if(!jobs.containsKey(uuid))
+            throw new NoSuchElementException("No such key");
+
         return jobs.get(uuid).getStatus();
     }
 
