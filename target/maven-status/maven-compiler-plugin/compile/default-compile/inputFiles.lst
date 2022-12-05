@@ -31,6 +31,7 @@
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/util/TSVReader.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/commands/search/DefaultSearchCommand.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/commands/SearchFacetsCommand.java
+/Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/async/adapters/CustomAsyncMaker.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/configuration/ElasticConfig.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/order/adapters/ElasticOrderBuilder.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/filters/PFilterBuilder.java
@@ -49,9 +50,11 @@
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/commands/settings/JsonSettingReader.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/index/indexer/adapters/MultiThreadedElasticIndexer.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/index/indexer/PDocumentIndexer.java
+/Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/senders/GraphQLController.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/index/indexer/IndexerSettings.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/model/titles/Directors.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/hexagon/Boundary.java
+/Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/async/PAsyncMaker.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/ports/requests/commands/search/AllSearchCommand.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/model/facets/Facet.java
 /Users/mariolombas/Documents/SpringBootW2/src/main/java/co/empathy/academy/demo_search/configuration/Files.java

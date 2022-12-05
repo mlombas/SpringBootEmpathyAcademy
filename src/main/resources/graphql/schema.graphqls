@@ -1,0 +1,8 @@
+type Query {
+  search(genre: String): [Title!]!
+}
+
+type Title {
+  id: String,
+  primaryTitle: String
+}

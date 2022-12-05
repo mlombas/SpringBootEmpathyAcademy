@@ -16,6 +16,7 @@ import co.empathy.academy.demo_search.ports.order.adapters.ElasticOrderBuilder;
 import co.empathy.academy.demo_search.ports.queries.PQueryBuilder;
 import co.empathy.academy.demo_search.ports.queries.adapters.ElasticQueryBuilder;
 import co.empathy.academy.demo_search.ports.requests.PRequestReactor;
+import co.empathy.academy.demo_search.ports.requests.senders.GraphQLController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
