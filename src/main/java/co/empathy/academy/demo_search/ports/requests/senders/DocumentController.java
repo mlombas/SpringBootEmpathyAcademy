@@ -54,6 +54,9 @@ public class DocumentController {
             @RequestParam Optional<MultipartFile> crew,
             @RequestParam Optional<MultipartFile> principals
     ) throws IOException {
+        if(basics == null || basics.isEmpty())
+            return ResponseEntity.badRequest().build();
+
         Path bpath = Paths.get(".", basics.getOriginalFilename());
         basics.transferTo(bpath);
 

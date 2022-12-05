@@ -133,6 +133,9 @@ public class SpringSearchController {
     public CompletableFuture<ResponseEntity<List<Title>>>
     genres(@PathVariable boolean and, @RequestBody List<String> genres)
     {
+        if(genres == null)
+            return CompletableFuture.completedFuture(ResponseEntity.badRequest().build());
+
         CompletableFuture<List<Title>> movies = reactor.reactToSearch(
                 new GenreSearchCommand(genres, and)
         );
@@ -147,29 +150,5 @@ public class SpringSearchController {
     genres(@RequestBody List<String> genres)
     {
         return genres(true, genres);
-    }
-
-    @GetMapping("/intitle")
-    public CompletableFuture<ResponseEntity<List<Title>>>
-    intitle(
-            @RequestBody String intitle,
-            @RequestParam(required = false) String genre,
-            @RequestParam(required = false) Integer durationMin,
-            @RequestParam(required = false) Integer durationMax,
-            @RequestParam(required = false) Integer yearMin,
-            @RequestParam(required = false) Integer yearMax
-            ) {
-        var filters = new SearchFilters()
-                .withGenre(genre)
-                .withDurationMin(durationMin)
-                .withDurationMax(durationMax)
-                .withYearMin(yearMin)
-                .withYearMax(yearMax);
-        return reactor.reactToSearch(
-                        new InTitleSearchCommand(intitle, filters)
-                )
-                .thenApply(m ->
-                        ResponseEntity.ok(m)
-                );
     }
 }
