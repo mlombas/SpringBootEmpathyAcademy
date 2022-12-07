@@ -63,25 +63,4 @@ public class SpringSearchControllerTests {
 
         assertEquals(result.get().getBody(), future.get());
     }
-
-    @Test
-    void givenController_inTitleSearch_thenListOfGenresReturned() throws ExecutionException, InterruptedException {
-        String search = "a";
-        List<Object> response = List.of(new Object[]{new Title()});
-        CompletableFuture<List<Object>> future = new CompletableFuture<>();
-        future.complete(response);
-
-        PRequestReactor reactor = mock(Boundary.class);
-        given(reactor.reactToSearch(argThat(searchCommand ->
-                ReflectionTestUtils.getField(searchCommand, "intitle")
-                        .equals(search)
-        )))
-                .willReturn(future);
-
-        SpringSearchController controller = new SpringSearchController();
-        ReflectionTestUtils.setField(controller, "reactor", reactor);
-        var result = controller.intitle(search,null, null, null, null, null);
-
-        assertEquals(result.get().getBody(), future.get());
-    }
 }
