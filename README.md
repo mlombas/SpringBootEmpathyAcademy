@@ -10,6 +10,7 @@ The Spring controllers send requests, these (for the moment) search requests get
 Inside the hexagon, the query, filter and ordering builders build each its own thing, and the hexagon bundles
 it all up before passing it down to the query executor, which executes the query.
 
+<<<<<<< Updated upstream
 The controllers also can send document commands, to index a file. These pass through an AsyncMaker. A module
 which executes something in the background, and returns an ID for the process so the progress can be 
 checked upon. This is done as to not halt any caller which issues an index query, as it could
@@ -17,6 +18,10 @@ take a very long time to complete.
 
 Finally, settings commands change the settings of a certain index. These are normally sent before document requests,
 but are not mandatory and can exist on their own, which is why they get their own command category.
+=======
+The controllers also can send document requests, to index a file. These are barebones for the moment and just pass the 
+data down to the document indexer.
+>>>>>>> Stashed changes
 
 ![The hexagon architecture](docs/hexagonal.png)
 
@@ -33,6 +38,7 @@ but are not mandatory and can exist on their own, which is why they get their ow
     - maxNHits - Upper bound of the number of hits returned
     - sortRating - (asc/desc) The ordering of the sort. asc = worst rated first.
 - `GET /search`: Alias for `GET /search/`
+<<<<<<< Updated upstream
 - `POST /document`: Takes a jsons as MultiPartRequest parameters, and indexes them. The parameters are:
     - basics - File containing the basics information (title.basics.tsv)
     - ratings - File containing the ratings information (title.ratings.tsv)
@@ -43,6 +49,9 @@ but are not mandatory and can exist on their own, which is why they get their ow
     > **_NOTE_**: The files directly downloaded from IMDb are NOT properly sorted, and the system does not sort them by itself. Non-properly-sorted files will result in non-properly-indexed 
 	indices
 
+=======
+- `POST /document`: Takes a json as body, and posts it to the search engine
+>>>>>>> Stashed changes
 
 > **_NOTE_**: The remaining endpoints from here are non-standard to the academy project
 - `GET /genres/`: Takes a list of space-separated strings (the genres) as body, and returns an array of movies that match all of the genres
